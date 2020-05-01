@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="com.example.goal_chase.EditActivity">
+
+	<EditText
+		android:id="@+id/EditName"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="Name" />
+
+	<EditText
+		android:id="@+id/EditDescription"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/EditName"
+		android:hint="Description"
+		android:inputType="textMultiLine" />
+
+	<Button
+		android:id="@+id/SetStartTime"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/EditDescription"
+		android:text="Set Start Time" />
+
+	<TextView
+		android:id="@+id/StartTime"
+		android:layout_width="wrap_content"
+		android:layout_height="45dp"
+		android:layout_below="@+id/EditDescription"
+		android:layout_toEndOf="@+id/SetStartTime"
+		android:gravity="center"
+		android:text="YYYY/MM/DD HH:MM:SS" />
+
+	<Button
+		android:id="@+id/SetEndTime"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/SetStartTime"
+		android:text="Set End Time" />
+
+	<TextView
+		android:id="@+id/EndTime"
+		android:layout_width="wrap_content"
+		android:layout_height="45dp"
+		android:layout_below="@+id/SetStartTime"
+		android:layout_toEndOf="@+id/SetStartTime"
+		android:gravity="center"
+		android:text="YYYY/MM/DD HH:MM:SS" />
+
+	<RadioGroup
+		android:id="@+id/SetPriority"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/SetEndTime"
+		android:orientation="vertical">
+
+		<RadioButton
+			android:id="@+id/Priority1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Priority-1" />
+
+		<RadioButton
+			android:id="@+id/Priority2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Priority-2" />
+
+		<RadioButton
+			android:id="@+id/Priority3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Priority-3" />
+
+		<RadioButton
+			android:id="@+id/Priority4"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Priority-4" />
+
+		<RadioButton
+			android:id="@+id/Priority5"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Priority-6" />
+	</RadioGroup>
+
+	<RadioGroup
+		android:id="@+id/SetStatus"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/SetPriority"
+		android:orientation="vertical">
+
+		<RadioButton
+			android:id="@+id/Status_Started"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Status - Started" />
+
+		<RadioButton
+			android:id="@+id/Status_Suspended"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Status - Suspended" />
+
+		<RadioButton
+			android:id="@+id/Status_Closed"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Status - Closed" />
+	</RadioGroup>
+
+	<Button
+		android:id="@+id/Reset"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/SetStatus"
+		android:text="Reset" />
+
+	<Button
+		android:id="@+id/Save"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/SetStatus"
+		android:layout_toEndOf="@+id/Reset"
+		android:text="Save" />
+
+	<Button
+		android:id="@+id/Cancel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/SetStatus"
+		android:layout_toEndOf="@+id/Save"
+		android:text="Cancel" />
+
+	<Button
+		android:id="@+id/Delete"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/SetStatus"
+		android:layout_toEndOf="@+id/Cancel"
+		android:text="Delete" />
+</RelativeLayout>
