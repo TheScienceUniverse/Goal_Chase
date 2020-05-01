@@ -91,7 +91,7 @@ class Utility {
 		}
 	}
 
-	String giveDeviceInformation() {
+	String getDeviceInformation() {
 		String uniqueId = "";
 
 		uniqueId += "Serial: " + android.os.Build.SERIAL;
