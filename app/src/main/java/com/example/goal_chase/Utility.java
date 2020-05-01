@@ -1,12 +1,14 @@
 package com.example.goal_chase;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.UUID;
 
 class Utility {
 	private File file = null;
@@ -87,5 +89,15 @@ class Utility {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	String giveDeviceInformation() {
+		String uniqueId = "";
+
+		uniqueId += "Serial: " + android.os.Build.SERIAL;
+		uniqueId += "\nSecureId: " + Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID);
+		uniqueId += "\nUUID: " + UUID.randomUUID().toString();
+
+		return uniqueId;
 	}
 }
