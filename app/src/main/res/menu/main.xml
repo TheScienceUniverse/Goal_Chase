@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/refresh"
+		android:icon="@drawable/refresh"
+		android:orderInCategory="0"
+		android:title="Refresh"
+		app:showAsAction="ifRoom"
+	/>
+	<item
+		android:id="@+id/copy"
+		android:icon="@drawable/copy"
+		android:orderInCategory="1"
+		android:title="Copy"
+		app:showAsAction="never"
+	/>
+	<item
+		android:id="@+id/download"
+		android:icon="@drawable/download"
+		android:orderInCategory="2"
+		android:title="Download"
+		app:showAsAction="never"
+	/>
+</menu>
