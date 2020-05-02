@@ -77,7 +77,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 	void save() {
 		if (dataReady()) {
-			this.utility.writeIntoFile(((EditText)findViewById(R.id.EditName)).getText().toString());
+			this.utility.writeIntoFile(
+				"\n\nName: " + ((EditText)findViewById(R.id.EditName)).getText().toString()
+				+ "\nStartTime: " + ((TextView)findViewById(R.id.StartTime)).getText().equals("YYYY/MM/DD HH:MM:SS")
+				+ "\nEndTine: " + ((TextView)findViewById(R.id.EndTime)).getText().equals("YYYY/MM/DD HH:MM:SS")
+			);
 			// Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
@@ -140,6 +144,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	boolean dataReady() {
-		return !((EditText)findViewById(R.id.EditName)).getText().toString().equals("");
+		return !((EditText)findViewById(R.id.EditName)).getText().toString().equals("")
+			&& !((TextView)findViewById(R.id.StartTime)).getText().equals("YYYY/MM/DD HH:MM:SS")
+			&& !((TextView)findViewById(R.id.EndTime)).getText().equals("YYYY/MM/DD HH:MM:SS");
 	}
 }
