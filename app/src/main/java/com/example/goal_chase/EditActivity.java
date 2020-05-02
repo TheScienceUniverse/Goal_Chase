@@ -9,6 +9,8 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import static java.lang.Integer.parseInt;
 
 public class EditActivity extends AppCompatActivity implements View.OnClickListener {
 	private String string = "";
+	private Utility utility = new Utility(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +76,12 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	void save() {
-		Toast.makeText(this, "Save", Toast.LENGTH_SHORT).show();
+		if (dataReady()) {
+			this.utility.writeIntoFile(((EditText)findViewById(R.id.EditName)).getText().toString());
+			// Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	void cancel() {
@@ -129,5 +137,9 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				}
 			}, year, month, day).show();
 		}
+	}
+
+	boolean dataReady() {
+		return !((EditText)findViewById(R.id.EditName)).getText().toString().equals("");
 	}
 }
