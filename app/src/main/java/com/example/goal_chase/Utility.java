@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 class Utility {
@@ -99,5 +101,17 @@ class Utility {
 		uniqueId += "\nUUID: " + UUID.randomUUID().toString();
 
 		return uniqueId;
+	}
+
+	List<Activity> getDummyActivityList() {
+		List<Activity> activities = new ArrayList<Activity>();
+
+		activities.add(new Activity("Activity-1", "01/01/2000", "01/01/2000", "Priority-1", "Completed"));
+		activities.add(new Activity("Activity-2", "01/01/2000", "01/01/2000", "Priority-2", "Completed"));
+		activities.add(new Activity("Activity-3", "01/01/2000", "01/01/2000", "Priority-3", "Completed"));
+		activities.add(new Activity("Activity-4", "01/01/2000", "01/01/2000", "Priority-4", "Completed"));
+		activities.add(new Activity("Activity-5", "01/01/2000", "01/01/2000", "Priority-5", "Completed"));
+
+		return  activities;
 	}
 }

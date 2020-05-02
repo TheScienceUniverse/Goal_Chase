@@ -7,6 +7,12 @@
 	android:layout_height="match_parent"
 	tools:context="com.example.goal_chase.MainActivity">
 
+	<ListView
+		android:id="@+id/ActivityList"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+	/>
+
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/fab"
 		android:layout_width="wrap_content"

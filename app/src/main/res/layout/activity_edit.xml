@@ -121,6 +121,13 @@
 			android:layout_height="wrap_content"
 			android:text="Status - Closed"
 		/>
+
+		<RadioButton
+			android:id="@+id/Status_Completed"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Status - Completed"
+		/>
 	</RadioGroup>
 
 	<Button
