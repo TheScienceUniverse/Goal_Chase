@@ -106,11 +106,14 @@ class Utility {
 	List<Activity> getDummyActivityList() {
 		List<Activity> activities = new ArrayList<Activity>();
 
-		activities.add(new Activity("Activity-1", "01/01/2000", "01/01/2000", "Priority-1", "Completed"));
-		activities.add(new Activity("Activity-2", "01/01/2000", "01/01/2000", "Priority-2", "Completed"));
-		activities.add(new Activity("Activity-3", "01/01/2000", "01/01/2000", "Priority-3", "Completed"));
-		activities.add(new Activity("Activity-4", "01/01/2000", "01/01/2000", "Priority-4", "Completed"));
+		activities.add(new Activity("Activity-1", "01/01/2000", "01/01/2000", "Priority-1", "Pending"));
+		activities.add(new Activity("Activity-2", "01/01/2000", "01/01/2000", "Priority-2", "Pending"));
+		activities.add(new Activity("Activity-3", "01/01/2000", "01/01/2000", "Priority-3", "Suspended"));
+		activities.add(new Activity("Activity-4", "01/01/2000", "01/01/2000", "Priority-4", "Suspended"));
 		activities.add(new Activity("Activity-5", "01/01/2000", "01/01/2000", "Priority-5", "Completed"));
+		activities.add(new Activity("Activity-6", "01/01/2000", "01/01/2000", "Priority-5", "Completed"));
+		activities.add(new Activity("Activity-7", "01/01/2000", "01/01/2000", "Priority-5", "Completed"));
+		activities.add(new Activity("Activity-8", "01/01/2000", "01/01/2000", "Priority-5", "Completed"));
 
 		return  activities;
 	}

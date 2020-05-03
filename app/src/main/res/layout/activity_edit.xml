@@ -49,13 +49,20 @@
 		android:text="YYYY/MM/DD HH:MM:SS"
 	/>
 
+	<View
+		android:id="@+id/horizontal_bar0"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@+id/EndTime"
+		android:background="#888888"
+	/>
+
 	<RadioGroup
 		android:id="@+id/SetPriority"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/SetEndTime"
-		android:orientation="vertical"
-		android:background="#afafaf">
+		android:layout_below="@+id/horizontal_bar0"
+		android:orientation="vertical">
 
 		<RadioButton
 			android:id="@+id/Priority1"
@@ -89,17 +96,24 @@
 			android:id="@+id/Priority5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Priority-6"
+			android:text="Priority-5"
 		/>
 	</RadioGroup>
+
+	<View
+		android:id="@+id/horizontal_bar1"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@+id/SetPriority"
+		android:background="#888888"
+	/>
 
 	<RadioGroup
 		android:id="@+id/SetStatus"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/SetPriority"
-		android:orientation="vertical"
-		android:background="#a0a0a0">
+		android:layout_below="@+id/horizontal_bar1"
+		android:orientation="vertical">
 
 		<RadioButton
 			android:id="@+id/Status_Started"
@@ -130,11 +144,19 @@
 		/>
 	</RadioGroup>
 
+	<View
+		android:id="@+id/horizontal_bar2"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@+id/SetStatus"
+		android:background="#888888"
+	/>
+
 	<Button
 		android:id="@+id/Reset"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/SetStatus"
+		android:layout_below="@+id/horizontal_bar2"
 		android:text="Reset"
 	/>
 
@@ -142,7 +164,7 @@
 		android:id="@+id/Save"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/SetStatus"
+		android:layout_below="@+id/horizontal_bar2"
 		android:layout_toEndOf="@+id/Reset"
 		android:text="Save"
 	/>
@@ -151,7 +173,7 @@
 		android:id="@+id/Cancel"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/SetStatus"
+		android:layout_below="@+id/horizontal_bar2"
 		android:layout_toEndOf="@+id/Save"
 		android:text="Cancel"
 	/>
@@ -160,7 +182,7 @@
 		android:id="@+id/Delete"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/SetStatus"
+		android:layout_below="@+id/horizontal_bar2"
 		android:layout_toEndOf="@+id/Cancel"
 		android:text="Delete"
 	/>

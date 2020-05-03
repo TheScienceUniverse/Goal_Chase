@@ -4,63 +4,66 @@ public class Activity {
 	String activityName;
 	String startTime;
 	String endTime;
-	String priorityImageSource;
-	String statusImageSource;
+	int priorityImageSource;
+	int statusImageSource;
 
-	public Activity (String activityName, String startTime, String endTime, String priority, String status) {
+	Activity (String activityName, String startTime, String endTime, String priority, String status) {
 		this.activityName = activityName;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.priorityImageSource = priority;
-		this.statusImageSource = status;
+		this.priorityImageSource = getPriorityImageSource(priority);
+		this.statusImageSource = getStatusImageSource(status);
 	}
 
-	String getPriorityImageSource (String priority) {
-		String url = "";
+	int getPriorityImageSource (String priority) {
+		int id = 0;
 
 		switch (priority) {
 			case "Priority-1":
-				url = "@drawable/red";
+				id = R.drawable.red;
 				break;
 			case "Priority-2":
-				url = "@drawable/orange";
+				id = R.drawable.orange;
 				break;
 			case "Priority-3":
-				url = "@drawable/yellow";
+				id = R.drawable.yellow;
 				break;
 			case "Priority-4":
-				url = "@drawable/green";
+				id = R.drawable.green;
 				break;
 			case "Priority-5":
-				url = "@drawable/blue";
+				id = R.drawable.blue;
 				break;
 			default:
 				break;
 		}
 
-		return url;
+		return id;
 	}
 
-	String getStatusImageSource (String status) {
-		String url = "";
+	int getStatusImageSource (String status) {
+		int id = 0;
 
 		switch (status) {
-			case "Status - Started":
-				url = "@drawable/";
+			case "Pending":
+				id = R.drawable.exclamation;
 				break;
-			case "Status - Suspended":
-				url = "@drawable/";
+			case "Started":
+				id = R.drawable.play;
 				break;
-			case "Status - Closed":
-				url = "@drawable/cross";
+			case "Suspended":
+				id = R.drawable.pause;
 				break;
-			case "Status - Completed":
-				url = "@drawable/tick";
+			case "Terminated":
+				id = R.drawable.cross;
+				break;
+			case "Completed":
+				id = R.drawable.tick;
 				break;
 			default:
 				break;
 		}
 
-		return url;
+		return id;
 	}
 }

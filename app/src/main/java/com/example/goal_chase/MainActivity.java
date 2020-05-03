@@ -42,11 +42,9 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
-		ArrayList<String> arrayList = new ArrayList<>();
-
-		CustomArrayAdapter arrayAdapter = new CustomArrayAdapter(this, utility.getDummyActivityList());
+		CustomArrayAdapter adapter = new CustomArrayAdapter(this, R.layout.activity_list_item, utility.getDummyActivityList());
 		ListView listView = findViewById(R.id.ActivityList);
-		listView.setAdapter(arrayAdapter);
+		listView.setAdapter(adapter);
 	}
 
 	@Override
@@ -72,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	class CustomArrayAdapter extends ArrayAdapter<String> {
+	class CustomArrayAdapter extends ArrayAdapter<Activity> {
 		Context context;
 		List<Activity> activities;
 
-		public CustomArrayAdapter(Context context, List<Activity> activities) {
-			super(context, R.layout.activity_list_item);
+		public CustomArrayAdapter(Context context, int layout, List<Activity> activities) {
+			super(context, layout, activities);
 			this.context = context;
 			this.activities = activities;
 		}
@@ -87,15 +85,12 @@ public class MainActivity extends AppCompatActivity {
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View listItem = layoutInflater.inflate(R.layout.activity_list_item, parent, false);
-			TextView activityName = listItem.findViewById(R.id.ActivityName);
-			ImageView priority = listItem.findViewById(R.id.Priority);
-			ImageView status = listItem.findViewById(R.id.Status);
 
 			((TextView)listItem.findViewById(R.id.ActivityName)).setText(this.activities.get(position).activityName);
-			((ImageView)listItem.findViewById(R.id.Priority)).setImageResource();
-			((ImageView)listItem.findViewById(R.id.Status)).setImageResource();
+			((ImageView)listItem.findViewById(R.id.Priority)).setImageResource(this.activities.get(position).priorityImageSource);
+			((ImageView)listItem.findViewById(R.id.Status)).setImageResource(this.activities.get(position).statusImageSource);
 
-			return super.getView(position, convertView, parent);
+			return listItem;
 		}
 	}
 }
