@@ -87,21 +87,14 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 	void save() {
 		if (this.dataReady()) {
-			this.string = "Name: " + this.activity.name
-				+ "\nStartTime: " + this.activity.startTime
-				+ "\nEndTine: " + this.activity.endTime
-				+ "\nPriority: " + this.activity.priority
-				+ "\nStatus: " + this.activity.status
+			this.string = this.activity.name
+				+ "\n" + this.activity.startTime
+				+ "\n" + this.activity.endTime
+				+ "\n" + this.activity.priority
+				+ "\n" + this.activity.status
 				+ "\n";
-			/*this.utility.writeIntoFile (
-				this.name
-				+ "\n" + this.startTime
-				+ "\n" + this.endTime
-				+ "\n" + this.priority
-				+ "\n" + this.status
-				+ "\n"
-			);*/
-			Toast.makeText(this, this.string, Toast.LENGTH_SHORT).show();
+			this.utility.writeIntoFile (string);
+			// Toast.makeText(this, this.string, Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
 		}
@@ -167,7 +160,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 		this.activity.startTime = ((TextView)findViewById(R.id.StartTime)).getText().toString();
 		this.activity.endTime = ((TextView)findViewById(R.id.EndTime)).getText().toString();
 		this.activity.priority = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetPriority)).getCheckedRadioButtonId())).getText().toString();
-		this.activity.priority = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetStatus)).getCheckedRadioButtonId())).getText().toString();
+		this.activity.status = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetStatus)).getCheckedRadioButtonId())).getText().toString();
 	}
 
 	void setValues() {

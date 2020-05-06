@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
 			listItem.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(context, activities.get(position).name, Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(context, EditActivity.class);
 					intent.putExtra("Activity", activities.get(position));
 					startActivity(intent);
