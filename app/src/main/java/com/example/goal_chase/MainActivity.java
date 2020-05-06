@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,13 +84,23 @@ public class MainActivity extends AppCompatActivity {
 
 		@NonNull
 		@Override
-		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+		public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View listItem = layoutInflater.inflate(R.layout.activity_list_item, parent, false);
 
-			((TextView)listItem.findViewById(R.id.ActivityName)).setText(this.activities.get(position).activityName);
+			((TextView)listItem.findViewById(R.id.ActivityName)).setText(this.activities.get(position).name);
 			((ImageView)listItem.findViewById(R.id.Priority)).setImageResource(this.activities.get(position).priorityImageSource);
 			((ImageView)listItem.findViewById(R.id.Status)).setImageResource(this.activities.get(position).statusImageSource);
+
+			listItem.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Toast.makeText(context, activities.get(position).name, Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(context, EditActivity.class);
+					intent.putExtra("Activity", activities.get(position));
+					startActivity(intent);
+				}
+			});
 
 			return listItem;
 		}

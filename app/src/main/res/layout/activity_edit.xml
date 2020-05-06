@@ -64,39 +64,46 @@
 		android:layout_below="@+id/horizontal_bar0"
 		android:orientation="vertical">
 
+		<TextView
+			android:id="@+id/PriorityHeader"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Set Priority"
+		/>
+
 		<RadioButton
 			android:id="@+id/Priority1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Priority-1"
+			android:text="P1"
 		/>
 
 		<RadioButton
 			android:id="@+id/Priority2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Priority-2"
+			android:text="P2"
 		/>
 
 		<RadioButton
 			android:id="@+id/Priority3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Priority-3"
+			android:text="P3"
 		/>
 
 		<RadioButton
 			android:id="@+id/Priority4"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Priority-4"
+			android:text="P4"
 		/>
 
 		<RadioButton
 			android:id="@+id/Priority5"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Priority-5"
+			android:text="P5"
 		/>
 	</RadioGroup>
 
@@ -115,32 +122,46 @@
 		android:layout_below="@+id/horizontal_bar1"
 		android:orientation="vertical">
 
-		<RadioButton
-			android:id="@+id/Status_Started"
-			android:layout_width="wrap_content"
+		<TextView
+			android:id="@+id/StatusTitle"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="Status - Started"
+			android:text="Set Status"
 		/>
 
 		<RadioButton
-			android:id="@+id/Status_Suspended"
+			android:id="@+id/Pending"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Status - Suspended"
+			android:text="Pending"
 		/>
 
 		<RadioButton
-			android:id="@+id/Status_Closed"
+			android:id="@+id/Started"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Status - Closed"
+			android:text="Started"
 		/>
 
 		<RadioButton
-			android:id="@+id/Status_Completed"
+			android:id="@+id/Suspended"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Status - Completed"
+			android:text="Suspended"
+		/>
+
+		<RadioButton
+			android:id="@+id/Terminated"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Terminated"
+		/>
+
+		<RadioButton
+			android:id="@+id/Completed"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Completed"
 		/>
 	</RadioGroup>
 

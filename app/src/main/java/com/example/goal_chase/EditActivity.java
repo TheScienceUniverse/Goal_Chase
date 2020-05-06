@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -23,6 +25,7 @@ import static java.lang.Integer.parseInt;
 public class EditActivity extends AppCompatActivity implements View.OnClickListener {
 	private String string = "";
 	private Utility utility = new Utility(this);
+	private Activity activity = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,13 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 		actionBar.setTitle("Edit Activity");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
+		this.activity = (Activity) getIntent().getSerializableExtra("Activity");
+
+		if (this.activity == null) {
+			this.activity = new Activity("", "", "", "", "");
+		}
+
+		this.setValues();
 		this.setListeners();
 	}
 
@@ -76,13 +86,22 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	void save() {
-		if (dataReady()) {
-			this.utility.writeIntoFile(
-				"\n\nName: " + ((EditText)findViewById(R.id.EditName)).getText().toString()
-				+ "\nStartTime: " + ((TextView)findViewById(R.id.StartTime)).getText().equals("YYYY/MM/DD HH:MM:SS")
-				+ "\nEndTine: " + ((TextView)findViewById(R.id.EndTime)).getText().equals("YYYY/MM/DD HH:MM:SS")
-			);
-			// Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
+		if (this.dataReady()) {
+			this.string = "Name: " + this.activity.name
+				+ "\nStartTime: " + this.activity.startTime
+				+ "\nEndTine: " + this.activity.endTime
+				+ "\nPriority: " + this.activity.priority
+				+ "\nStatus: " + this.activity.status
+				+ "\n";
+			/*this.utility.writeIntoFile (
+				this.name
+				+ "\n" + this.startTime
+				+ "\n" + this.endTime
+				+ "\n" + this.priority
+				+ "\n" + this.status
+				+ "\n"
+			);*/
+			Toast.makeText(this, this.string, Toast.LENGTH_SHORT).show();
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
 		}
@@ -143,9 +162,29 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	}
 
+	void getValues() {
+		this.activity.name = ((EditText)findViewById(R.id.EditName)).getText().toString();
+		this.activity.startTime = ((TextView)findViewById(R.id.StartTime)).getText().toString();
+		this.activity.endTime = ((TextView)findViewById(R.id.EndTime)).getText().toString();
+		this.activity.priority = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetPriority)).getCheckedRadioButtonId())).getText().toString();
+		this.activity.priority = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetStatus)).getCheckedRadioButtonId())).getText().toString();
+	}
+
+	void setValues() {
+		((EditText)findViewById(R.id.EditName)).setText(this.activity.name);
+		((TextView)findViewById(R.id.StartTime)).setText(this.activity.startTime);
+		((TextView)findViewById(R.id.EndTime)).setText(this.activity.endTime);
+		((RadioButton) findViewById(this.activity.getRadioButtonId(this.activity.priority))).setChecked(true);
+		((RadioButton) findViewById(this.activity.getRadioButtonId(this.activity.status))).setChecked(true);
+	}
+
 	boolean dataReady() {
-		return !((EditText)findViewById(R.id.EditName)).getText().toString().equals("")
-			&& !((TextView)findViewById(R.id.StartTime)).getText().equals("YYYY/MM/DD HH:MM:SS")
-			&& !((TextView)findViewById(R.id.EndTime)).getText().equals("YYYY/MM/DD HH:MM:SS");
+		this.getValues();
+
+		return !this.activity.name.equals("")
+			&& !this.activity.startTime.equals("YYYY/MM/DD HH:MM:SS")
+			&& !this.activity.endTime.equals("YYYY/MM/DD HH:MM:SS")
+			&& !this.activity.priority.equals("")
+			&& !this.activity.status.equals("");
 	}
 }

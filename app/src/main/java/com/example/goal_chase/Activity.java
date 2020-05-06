@@ -1,69 +1,82 @@
 package com.example.goal_chase;
 
-public class Activity {
-	String activityName;
+import java.io.Serializable;
+
+public class Activity implements Serializable {
+	String name;
 	String startTime;
 	String endTime;
+	String priority;
+	String status;
 	int priorityImageSource;
 	int statusImageSource;
 
-	Activity (String activityName, String startTime, String endTime, String priority, String status) {
-		this.activityName = activityName;
+	Activity (String name, String startTime, String endTime, String priority, String status) {
+		this.name = name;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.priorityImageSource = getPriorityImageSource(priority);
-		this.statusImageSource = getStatusImageSource(status);
+		this.priority = priority;
+		this.status = status;
+		this.priorityImageSource = getImageSource(priority);
+		this.statusImageSource = getImageSource(status);
 	}
 
-	int getPriorityImageSource (String priority) {
+	int getImageSource (String string) {
 		int id = 0;
 
-		switch (priority) {
-			case "Priority-1":
-				id = R.drawable.red;
+		String[] strings = new String[] {
+			"P1", "P2", "P3", "P4", "P5",
+			"Pending", "Started", "Suspended", "Terminated", "Completed"
+		};
+
+		int[] ints = new int[] {
+			R.drawable.red,
+			R.drawable.orange,
+			R.drawable.yellow,
+			R.drawable.green,
+			R.drawable.blue,
+			R.drawable.exclamation,
+			R.drawable.play,
+			R.drawable.pause,
+			R.drawable.cross,
+			R.drawable.tick
+		};
+
+		for (id = 0; id < strings.length; id++) {
+			if (string.equals(strings[id])) {
 				break;
-			case "Priority-2":
-				id = R.drawable.orange;
-				break;
-			case "Priority-3":
-				id = R.drawable.yellow;
-				break;
-			case "Priority-4":
-				id = R.drawable.green;
-				break;
-			case "Priority-5":
-				id = R.drawable.blue;
-				break;
-			default:
-				break;
+			}
 		}
 
-		return id;
+		return (id == strings.length) ? 0 : ints[id];
 	}
 
-	int getStatusImageSource (String status) {
+	int getRadioButtonId (String string) {
 		int id = 0;
+		String[] strings = new String[] {
+				"P1", "P2", "P3", "P4", "P5",
+				"Pending", "Started", "Suspended", "Terminated", "Completed"
+		};
 
-		switch (status) {
-			case "Pending":
-				id = R.drawable.exclamation;
+		int[] ints = new int[] {
+				R.id.Priority1,
+				R.id.Priority2,
+				R.id.Priority3,
+				R.id.Priority4,
+				R.id.Priority5,
+				R.id.Pending,
+				R.id.Started,
+				R.id.Suspended,
+				R.id.Terminated,
+				R.id.Completed
+		};
+
+		for (id = 0; id < strings.length; id++) {
+			if (string.equals(strings[id])) {
 				break;
-			case "Started":
-				id = R.drawable.play;
-				break;
-			case "Suspended":
-				id = R.drawable.pause;
-				break;
-			case "Terminated":
-				id = R.drawable.cross;
-				break;
-			case "Completed":
-				id = R.drawable.tick;
-				break;
-			default:
-				break;
+			}
 		}
 
-		return id;
+		return (id == strings.length) ? 0 : ints[id];
 	}
 }
