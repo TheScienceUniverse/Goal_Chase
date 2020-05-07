@@ -52,7 +52,7 @@ class Utility {
 		this.prepareFile();
 
 		try {
-			FileWriter fileWriter = new FileWriter(this.file);
+			FileWriter fileWriter = new FileWriter(this.file, true);
 			fileWriter.append(fileText);
 			fileWriter.flush();
 			fileWriter.close();
@@ -68,10 +68,7 @@ class Utility {
 	}
 
 	void prepareFile() {
-		// String filePath = "/Goal_Chase/";
 		String fileName = "goals.txt";
-
-		// File directory = new File(Environment.getExternalStorageDirectory(), filePath);
 		File directory = this.context.getExternalFilesDir("/");
 
 		if (!directory.exists()) {
@@ -84,7 +81,7 @@ class Utility {
 
 		if (!this.file.exists()) {
 			try {
-				this.file.createNewFile();
+				boolean result = this.file.createNewFile();
 				Toast.makeText(this.context, "File creation success!", Toast.LENGTH_SHORT).show();
 			} catch (IOException e) {
 				Toast.makeText(this.context, "File creation failed!", Toast.LENGTH_SHORT).show();
@@ -116,5 +113,57 @@ class Utility {
 		activities.add(new Activity("Activity-8", "01/01/2000", "01/01/2000", "P5", "Completed"));
 
 		return  activities;
+	}
+
+	List<Activity> getActivitiesFromFile() {
+		List<Activity> activities = new ArrayList<Activity>();
+		Activity activity = null;
+		String string = readFromFile();
+		String text = null;
+		int i = 0;
+
+		while (i < string.length()) {
+			activity = new Activity(null, null, null, null, null);
+
+			text = "";
+			while (string.charAt(i) != '\n') {
+				text += string.charAt(i);
+				++i;
+			}
+			activity.name = text;
+
+			text = "";
+			while (string.charAt(i) != '\n') {
+				text += string.charAt(i);
+				++i;
+			}
+			activity.startTime = text;
+
+			text = "";
+			while (string.charAt(i) != '\n') {
+				text += string.charAt(i);
+				++i;
+			}
+			activity.endTime = text;
+
+			text = "";
+			while (string.charAt(i) != '\n') {
+				text += string.charAt(i);
+				++i;
+			}
+			activity.priority = text;
+
+			text = "";
+			while (string.charAt(i) != '\n') {
+				text += string.charAt(i);
+				++i;
+			}
+			activity.status = text;
+
+			activities.add(activity);
+			++i;
+		}
+
+		return activities;
 	}
 }

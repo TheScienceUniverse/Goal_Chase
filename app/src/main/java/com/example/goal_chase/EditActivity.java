@@ -40,9 +40,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 		if (this.activity == null) {
 			this.activity = new Activity("", "", "", "", "");
+		} else {
+			this.setValues();
 		}
 
-		this.setValues();
 		this.setListeners();
 	}
 
@@ -81,9 +82,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 		}
 	}
 
-	void reset() {
-		Toast.makeText(this, "Reset", Toast.LENGTH_SHORT).show();
-	}
+	void reset() {}
 
 	void save() {
 		if (this.dataReady()) {
@@ -93,15 +92,14 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				+ "\n" + this.activity.priority
 				+ "\n" + this.activity.status
 				+ "\n";
-			this.utility.writeIntoFile (string);
-			// Toast.makeText(this, this.string, Toast.LENGTH_SHORT).show();
+			this.utility.writeIntoFile (this.string);
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	void cancel() {
-		Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+		startActivity(new Intent(this, MainActivity.class));
 	}
 
 	void delete() {
