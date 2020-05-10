@@ -93,6 +93,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				+ "\n" + this.activity.status
 				+ "\n";
 			this.utility.writeIntoFile (this.string);
+
+			startActivity(new Intent(EditActivity.this, MainActivity.class));
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
 		}

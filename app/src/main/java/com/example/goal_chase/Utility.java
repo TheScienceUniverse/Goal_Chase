@@ -35,9 +35,12 @@ class Utility {
 
 		try {
 			FileReader fileReader = new FileReader(file);
-			while (fileReader.read() == -1) {
-				fileText += (char) fileReader.read();
+			int c;
+
+			while ((c = fileReader.read())!=-1) {
+				fileText += (char) c;
 			}
+
 			fileReader.close();
 			Toast.makeText(context, "Reading Successful", Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
@@ -116,52 +119,48 @@ class Utility {
 	}
 
 	List<Activity> getActivitiesFromFile() {
-		List<Activity> activities = new ArrayList<Activity>();
-		Activity activity = null;
+		List<Activity> activities = new ArrayList<>();
 		String string = readFromFile();
-		String text = null;
 		int i = 0;
 
+		String name = "";
+		String startTime = "";
+		String endTime = "";
+		String priority = "";
+		String status = "";
+
 		while (i < string.length()) {
-			activity = new Activity(null, null, null, null, null);
-
-			text = "";
-			while (string.charAt(i) != '\n') {
-				text += string.charAt(i);
+			while(string.charAt(i) != '\n') {
+				name += string.charAt(i);
 				++i;
 			}
-			activity.name = text;
-
-			text = "";
-			while (string.charAt(i) != '\n') {
-				text += string.charAt(i);
-				++i;
-			}
-			activity.startTime = text;
-
-			text = "";
-			while (string.charAt(i) != '\n') {
-				text += string.charAt(i);
-				++i;
-			}
-			activity.endTime = text;
-
-			text = "";
-			while (string.charAt(i) != '\n') {
-				text += string.charAt(i);
-				++i;
-			}
-			activity.priority = text;
-
-			text = "";
-			while (string.charAt(i) != '\n') {
-				text += string.charAt(i);
-				++i;
-			}
-			activity.status = text;
-
-			activities.add(activity);
 			++i;
+
+			while(string.charAt(i) != '\n') {
+				startTime += string.charAt(i);
+				++i;
+			}
+			++i;
+
+			while(string.charAt(i) != '\n') {
+				endTime += string.charAt(i);
+				++i;
+			}
+			++i;
+
+			while(string.charAt(i) != '\n') {
+				priority += string.charAt(i);
+				++i;
+			}
+			++i;
+
+			while(string.charAt(i) != '\n') {
+				status += string.charAt(i);
+				++i;
+			}
+			++i;
+
+			activities.add(new Activity(name, startTime, endTime, priority, status));
 		}
 
 		return activities;

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
-		CustomArrayAdapter adapter = new CustomArrayAdapter(this, R.layout.activity_list_item, utility.getDummyActivityList());
+		CustomArrayAdapter adapter = new CustomArrayAdapter(this, R.layout.activity_list_item, utility.getActivitiesFromFile());
 		ListView listView = findViewById(R.id.ActivityList);
 		listView.setAdapter(adapter);
 	}
