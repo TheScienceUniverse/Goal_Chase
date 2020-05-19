@@ -2,6 +2,7 @@ package com.example.goal_chase;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
@@ -12,15 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static java.lang.Integer.parseInt;
+
 class Utility {
 	private File file = null;
 	private Context context = null;
 
-	Utility(Context context) {
+	Utility (Context context) {
 		this.context = context;
 	}
 
-	String padLeftZeros(String string, int numberOfDigits) {
+	String padLeftZeros (String string, int numberOfDigits) {
 		String leftZeros = "";
 		for (int i = 0; i < numberOfDigits - string.length(); i++) {
 			leftZeros += "0";
@@ -51,12 +54,57 @@ class Utility {
 		return fileText;
 	}
 
-	void writeIntoFile(String fileText) {
+	void writeIntoFile (String fileText) {
 		this.prepareFile();
 
 		try {
 			FileWriter fileWriter = new FileWriter(this.file, true);
 			fileWriter.append(fileText);
+			fileWriter.flush();
+			fileWriter.close();
+			Toast.makeText(context, "Writing Successful", Toast.LENGTH_SHORT).show();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Toast.makeText(context, "Writing Failed", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	void updateFile (Activity activity) {
+		List<Activity> activities = getActivitiesFromFile();
+		int i;
+		boolean flag = false;
+
+		for (i = 0; i < activities.size(); i++) {
+			if (activities.get(i).id == activity.id) {
+				flag = true;
+				break;
+			}
+		}
+
+		if (flag) {
+			activities.set(i, activity);
+		} else {
+			activity.id = activities.size();
+			activities.add(activity);
+		}
+
+		String fileText = "";
+
+		for (i = 0; i < activities.size(); i++) {
+			fileText += activities.get(i).id
+				+ "\n" + activities.get(i).name
+				+ "\n" + activities.get(i).startTime
+				+ "\n" + activities.get(i).endTime
+				+ "\n" + activities.get(i).priority
+				+ "\n" + activities.get(i).status
+				+ "\n";
+		}
+
+		this.prepareFile();
+
+		try {
+			FileWriter fileWriter = new FileWriter(this.file, false);
+			fileWriter.write(fileText);
 			fileWriter.flush();
 			fileWriter.close();
 			Toast.makeText(context, "Writing Successful", Toast.LENGTH_SHORT).show();
@@ -106,14 +154,14 @@ class Utility {
 	List<Activity> getDummyActivityList() {
 		List<Activity> activities = new ArrayList<Activity>();
 
-		activities.add(new Activity("Activity-1", "01/01/2000", "01/01/2000", "P1", "Pending"));
-		activities.add(new Activity("Activity-2", "01/01/2000", "01/01/2000", "P2", "Pending"));
-		activities.add(new Activity("Activity-3", "01/01/2000", "01/01/2000", "P3", "Suspended"));
-		activities.add(new Activity("Activity-4", "01/01/2000", "01/01/2000", "P4", "Suspended"));
-		activities.add(new Activity("Activity-5", "01/01/2000", "01/01/2000", "P5", "Completed"));
-		activities.add(new Activity("Activity-6", "01/01/2000", "01/01/2000", "P5", "Completed"));
-		activities.add(new Activity("Activity-7", "01/01/2000", "01/01/2000", "P5", "Completed"));
-		activities.add(new Activity("Activity-8", "01/01/2000", "01/01/2000", "P5", "Completed"));
+		activities.add(new Activity(0,"Activity-1", "01/01/2000", "01/01/2000", "P1", "Pending"));
+		activities.add(new Activity(1,"Activity-2", "01/01/2000", "01/01/2000", "P2", "Pending"));
+		activities.add(new Activity(2,"Activity-3", "01/01/2000", "01/01/2000", "P3", "Suspended"));
+		activities.add(new Activity(3,"Activity-4", "01/01/2000", "01/01/2000", "P4", "Suspended"));
+		activities.add(new Activity(4,"Activity-5", "01/01/2000", "01/01/2000", "P5", "Completed"));
+		activities.add(new Activity(5,"Activity-6", "01/01/2000", "01/01/2000", "P5", "Completed"));
+		activities.add(new Activity(6,"Activity-7", "01/01/2000", "01/01/2000", "P5", "Completed"));
+		activities.add(new Activity(7,"Activity-8", "01/01/2000", "01/01/2000", "P5", "Completed"));
 
 		return  activities;
 	}
@@ -123,13 +171,27 @@ class Utility {
 		String string = readFromFile();
 		int i = 0;
 
-		String name = "";
-		String startTime = "";
-		String endTime = "";
-		String priority = "";
-		String status = "";
+		String id = null;
+		String name = null;
+		String startTime = null;
+		String endTime = null;
+		String priority = null;
+		String status = null;
 
 		while (i < string.length()) {
+			id = "";
+			name = "";
+			startTime = "";
+			endTime = "";
+			priority = "";
+			status = "";
+
+			while(string.charAt(i) != '\n') {
+				id += string.charAt(i);
+				++i;
+			}
+			++i;
+
 			while(string.charAt(i) != '\n') {
 				name += string.charAt(i);
 				++i;
@@ -160,8 +222,14 @@ class Utility {
 			}
 			++i;
 
-			activities.add(new Activity(name, startTime, endTime, priority, status));
+			activities.add(new Activity(parseInt(id, 10), name, startTime, endTime, priority, status));
 		}
+
+		String msg = "";
+		for (i = 0; i < activities.size(); i++) {
+			msg += activities.get(i).id + " ";
+		}
+		Log.d("id", "" +  msg);
 
 		return activities;
 	}

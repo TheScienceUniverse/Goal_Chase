@@ -39,7 +39,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 		this.activity = (Activity) getIntent().getSerializableExtra("Activity");
 
 		if (this.activity == null) {
-			this.activity = new Activity("", "", "", "", "");
+			this.activity = new Activity(-1, "", "", "", "", "");
 		} else {
 			this.setValues();
 		}
@@ -86,14 +86,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 	void save() {
 		if (this.dataReady()) {
-			this.string = this.activity.name
-				+ "\n" + this.activity.startTime
-				+ "\n" + this.activity.endTime
-				+ "\n" + this.activity.priority
-				+ "\n" + this.activity.status
-				+ "\n";
-			this.utility.writeIntoFile (this.string);
-
+			this.utility.updateFile(this.activity);
 			startActivity(new Intent(EditActivity.this, MainActivity.class));
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();

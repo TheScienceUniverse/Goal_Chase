@@ -3,6 +3,7 @@ package com.example.goal_chase;
 import java.io.Serializable;
 
 public class Activity implements Serializable {
+	int id;
 	String name;
 	String startTime;
 	String endTime;
@@ -11,7 +12,8 @@ public class Activity implements Serializable {
 	int priorityImageSource;
 	int statusImageSource;
 
-	Activity (String name, String startTime, String endTime, String priority, String status) {
+	Activity (int id, String name, String startTime, String endTime, String priority, String status) {
+		this.id = id;
 		this.name = name;
 		this.startTime = startTime;
 		this.endTime = endTime;
