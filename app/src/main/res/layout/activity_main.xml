@@ -5,7 +5,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context="com.example.goal_chase.MainActivity">
+	tools:context="com.the01guy.goal_chase.MainActivity">
 
 	<ListView
 		android:id="@+id/ActivityList"

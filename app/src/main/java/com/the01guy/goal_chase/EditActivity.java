@@ -1,4 +1,4 @@
-package com.example.goal_chase;
+package com.the01guy.goal_chase;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.example.goal_chase;
+package com.the01guy.goal_chase;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
 		// Context of the app under test.
 		Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-		assertEquals("com.example.goal_chase", appContext.getPackageName());
+		assertEquals("com.the01guy.goal_chase", appContext.getPackageName());
 	}
 }
