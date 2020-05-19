@@ -86,7 +86,12 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 	void save() {
 		if (this.dataReady()) {
-			this.utility.updateFile(this.activity);
+			if (this.activity.id == -1) {
+				this.utility.updateFile(this.activity, "Add");
+			} else {
+				this.utility.updateFile(this.activity, "Update");
+			}
+
 			startActivity(new Intent(EditActivity.this, MainActivity.class));
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
@@ -98,7 +103,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	void delete() {
-		Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
+		if (this.dataReady() && this.activity.id != -1) {
+			this.utility.updateFile(this.activity, "Delete");
+		}
+
+		startActivity(new Intent(EditActivity.this, MainActivity.class));
 	}
 
 	void pickDateTime(int id) {

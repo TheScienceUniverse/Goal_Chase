@@ -69,27 +69,30 @@ class Utility {
 		}
 	}
 
-	void updateFile (Activity activity) {
+	void updateFile (Activity activity, String command) {
 		List<Activity> activities = getActivitiesFromFile();
 		int i;
-		boolean flag = false;
 
 		for (i = 0; i < activities.size(); i++) {
-			if (activities.get(i).id == activity.id) {
-				flag = true;
+			if (activity.id == activities.get(i).id) {
 				break;
 			}
 		}
 
-		if (flag) {
-			activities.set(i, activity);
+		if (command.equals("Delete")) {
+			if (activity.id != -1) {
+				activities.remove(i);
+			}
 		} else {
-			activity.id = activities.size();
-			activities.add(activity);
+			if (activity.id == -1) {
+				activity.id = activities.size();
+				activities.add(activity);
+			} else {
+				activities.set(i, activity);
+			}
 		}
 
 		String fileText = "";
-
 		for (i = 0; i < activities.size(); i++) {
 			fileText += activities.get(i).id
 				+ "\n" + activities.get(i).name
@@ -101,7 +104,6 @@ class Utility {
 		}
 
 		this.prepareFile();
-
 		try {
 			FileWriter fileWriter = new FileWriter(this.file, false);
 			fileWriter.write(fileText);
