@@ -1,4 +1,4 @@
-package com.the01guy.goal_chase;
+package dev.the01guy.goal_chase;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.the01guy.goal_chase.R;
 
 import java.util.List;
 

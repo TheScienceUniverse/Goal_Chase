@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "521988437300",
+    "firebase_url": "https://goal-chase.firebaseio.com",
+    "project_id": "goal-chase",
+    "storage_bucket": "goal-chase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521988437300:android:0efc4a1fce70bc1d89a161",
+        "android_client_info": {
+          "package_name": "dev.the01guy.goal_chase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521988437300-1b0nglg2e4fc87fm9tcipn3keke73a4h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.the01guy.goal_chase",
+            "certificate_hash": "77bcd182fd0aaa62fb1ba308fbc725ba80a784e9"
+          }
+        },
+        {
+          "client_id": "521988437300-co58q0tcd7e55reg0971rb7ed2079v15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGwxhVxd2pIbEMJSHU8Ts1IbNxVM4jUJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521988437300-co58q0tcd7e55reg0971rb7ed2079v15.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

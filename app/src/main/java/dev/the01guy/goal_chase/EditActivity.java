@@ -1,4 +1,4 @@
-package com.the01guy.goal_chase;
+package dev.the01guy.goal_chase;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.the01guy.goal_chase.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

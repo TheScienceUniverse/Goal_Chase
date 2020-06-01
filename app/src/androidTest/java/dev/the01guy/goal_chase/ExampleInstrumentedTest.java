@@ -1,4 +1,4 @@
-package com.the01guy.goal_chase;
+package dev.the01guy.goal_chase;
 
 import android.content.Context;
 
