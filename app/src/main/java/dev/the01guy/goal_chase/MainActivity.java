@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 				startActivity(new Intent(MainActivity.this, EditActivity.class));
 			}
 		});
+
+		Log.d("Device Information", utility.getDeviceInformation());
 
 		CustomArrayAdapter adapter = new CustomArrayAdapter(this, R.layout.activity_list_item, utility.getActivitiesFromFile());
 		ListView listView = findViewById(R.id.ActivityList);

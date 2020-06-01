@@ -18,6 +18,7 @@ import static java.lang.Integer.parseInt;
 class Utility {
 	private File file = null;
 	private Context context = null;
+	private String deviceId = "";
 
 	Utility (Context context) {
 		this.context = context;
@@ -144,13 +145,11 @@ class Utility {
 	}
 
 	String getDeviceInformation() {
-		String uniqueId = "";
+		// this.deviceId += android.os.Build.SERIAL; // SerialId
+		this.deviceId += Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID); // SecureId
+		this.deviceId += "\n" + UUID.randomUUID().toString(); // UUId
 
-		uniqueId += "Serial: " + android.os.Build.SERIAL;
-		uniqueId += "\nSecureId: " + Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID);
-		uniqueId += "\nUUID: " + UUID.randomUUID().toString();
-
-		return uniqueId;
+		return this.deviceId;
 	}
 
 	List<Activity> getDummyActivityList() {
