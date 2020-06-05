@@ -146,8 +146,11 @@ class Utility {
 
 	String getDeviceInformation() {
 		// this.deviceId += android.os.Build.SERIAL; // SerialId
-		this.deviceId += Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID); // SecureId
-		this.deviceId += "\n" + UUID.randomUUID().toString(); // UUId
+		this.deviceId += "SecureId: " + Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID); // SecureId
+		this.deviceId += "\nUUId: " + UUID.randomUUID().toString(); // UUId
+
+		Hash hash = new Hash();
+		this.deviceId = hash.sha256(this.deviceId);
 
 		return this.deviceId;
 	}
