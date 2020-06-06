@@ -1,20 +1,20 @@
-package dev.the01guy.goal_chase;
+package dev.the01guy.goal_chase.utility;
 
 import com.the01guy.goal_chase.R;
 
 import java.io.Serializable;
 
 public class Activity implements Serializable {
-	int id;
-	String name;
-	String startTime;
-	String endTime;
-	String priority;
-	String status;
-	int priorityImageSource;
-	int statusImageSource;
+	public int id;
+	public String name;
+	public String startTime;
+	public String endTime;
+	public String priority;
+	public String status;
+	public int priorityImageSource;
+	public int statusImageSource;
 
-	Activity (int id, String name, String startTime, String endTime, String priority, String status) {
+	public Activity (int id, String name, String startTime, String endTime, String priority, String status) {
 		this.id = id;
 		this.name = name;
 		this.startTime = startTime;
@@ -25,25 +25,25 @@ public class Activity implements Serializable {
 		this.statusImageSource = getImageSource(status);
 	}
 
-	int getImageSource (String string) {
+	public int getImageSource (String string) {
 		int id = 0;
 
 		String[] strings = new String[] {
-			"P1", "P2", "P3", "P4", "P5",
-			"Pending", "Started", "Suspended", "Terminated", "Completed"
+				"P1", "P2", "P3", "P4", "P5",
+				"Pending", "Started", "Suspended", "Terminated", "Completed"
 		};
 
 		int[] ints = new int[] {
-			R.drawable.red,
-			R.drawable.orange,
-			R.drawable.yellow,
-			R.drawable.green,
-			R.drawable.blue,
-			R.drawable.exclamation,
-			R.drawable.play,
-			R.drawable.pause,
-			R.drawable.cross,
-			R.drawable.tick
+				R.drawable.red,
+				R.drawable.orange,
+				R.drawable.yellow,
+				R.drawable.green,
+				R.drawable.blue,
+				R.drawable.exclamation,
+				R.drawable.play,
+				R.drawable.pause,
+				R.drawable.cross,
+				R.drawable.tick
 		};
 
 		for (id = 0; id < strings.length; id++) {
@@ -55,7 +55,7 @@ public class Activity implements Serializable {
 		return (id == strings.length) ? 0 : ints[id];
 	}
 
-	int getRadioButtonId (String string) {
+	public int getRadioButtonId (String string) {
 		int id = 0;
 		String[] strings = new String[] {
 				"P1", "P2", "P3", "P4", "P5",

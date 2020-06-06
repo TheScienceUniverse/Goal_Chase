@@ -1,8 +1,5 @@
 package dev.the01guy.goal_chase;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -17,10 +14,17 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.the01guy.goal_chase.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+
+import dev.the01guy.goal_chase.utility.Activity;
+import dev.the01guy.goal_chase.utility.Utility;
 
 import static java.lang.Integer.parseInt;
 
@@ -41,7 +45,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 		this.activity = (Activity) getIntent().getSerializableExtra("Activity");
 
 		if (this.activity == null) {
-			this.activity = new Activity(-1, "", "", "", "", "");
+			this.activity = new Activity (-1, "", "", "", "", "");
 		} else {
 			this.setValues();
 		}
@@ -89,19 +93,19 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 	void save() {
 		if (this.dataReady()) {
 			if (this.activity.id == -1) {
-				this.utility.updateFile(this.activity, "Add");
+				this.utility.updateFile (this.activity, "Add");
 			} else {
-				this.utility.updateFile(this.activity, "Update");
+				this.utility.updateFile (this.activity, "Update");
 			}
 
-			startActivity(new Intent(EditActivity.this, MainActivity.class));
+			startActivity(new Intent (EditActivity.this, MainActivity.class));
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	void cancel() {
-		startActivity(new Intent(this, MainActivity.class));
+		startActivity (new Intent(this, MainActivity.class));
 	}
 
 	void delete() {
@@ -114,7 +118,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 	void pickDateTime(int id) {
 		Date date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy/MM/dd hh:mm:ss");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy/MM/dd hh:mm:ss", Locale.US);
 		this.string = simpleDateFormat.format(date);
 
 		int year = parseInt(this.string.substring(0, 4));
@@ -137,7 +141,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				@Override
 				public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 					TextView textView = findViewById(R.id.StartTime);
-					textView.setText(year + "/" + month + "/" + dayOfMonth);
+					string = year + "/" + month + "/" + dayOfMonth;
+					textView.setText(string);
 				}
 			}, year, month, day).show();
 		} else if (id == R.id.SetEndTime) {
@@ -153,7 +158,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				@Override
 				public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 					TextView textView = findViewById(R.id.EndTime);
-					textView.setText(year + "/" + month + "/" + dayOfMonth);
+					string = year + "/" + month + "/" + dayOfMonth;
+					textView.setText(string);
 				}
 			}, year, month, day).show();
 		}

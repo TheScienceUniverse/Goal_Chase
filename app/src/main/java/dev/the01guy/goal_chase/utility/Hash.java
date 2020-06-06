@@ -1,4 +1,4 @@
-package dev.the01guy.goal_chase;
+package dev.the01guy.goal_chase.utility;
 
 class Hash {
 	private String H[] = new String [8];

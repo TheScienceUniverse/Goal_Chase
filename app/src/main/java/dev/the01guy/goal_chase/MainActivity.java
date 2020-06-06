@@ -1,9 +1,5 @@
 package dev.the01guy.goal_chase;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,10 +15,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.the01guy.goal_chase.R;
 
 import java.util.List;
+
+import dev.the01guy.goal_chase.utility.*;
 
 public class MainActivity extends AppCompatActivity {
 	@Override
@@ -87,9 +89,9 @@ public class MainActivity extends AppCompatActivity {
 			LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View listItem = layoutInflater.inflate(R.layout.activity_list_item, parent, false);
 
-			((TextView)listItem.findViewById(R.id.ActivityName)).setText(this.activities.get(position).name);
-			((ImageView)listItem.findViewById(R.id.Priority)).setImageResource(this.activities.get(position).priorityImageSource);
-			((ImageView)listItem.findViewById(R.id.Status)).setImageResource(this.activities.get(position).statusImageSource);
+			((TextView) listItem.findViewById (R.id.ActivityName)).setText (this.activities.get(position).name);
+			((ImageView) listItem.findViewById (R.id.Priority)).setImageResource (this.activities.get(position).priorityImageSource);
+			((ImageView) listItem.findViewById (R.id.Status)).setImageResource (this.activities.get(position).statusImageSource);
 
 			listItem.setOnClickListener(new View.OnClickListener() {
 				@Override

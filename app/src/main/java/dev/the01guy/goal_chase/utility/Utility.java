@@ -1,4 +1,4 @@
-package dev.the01guy.goal_chase;
+package dev.the01guy.goal_chase.utility;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -11,16 +11,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static java.lang.Integer.parseInt;
 
-class Utility {
+public class Utility {
 	private File file = null;
 	private Context context = null;
 	private String deviceId = "";
 
-	Utility (Context context) {
+	public Utility (Context context) {
 		this.context = context;
 	}
 
@@ -32,7 +31,7 @@ class Utility {
 		return leftZeros + string;
 	}
 
-	String readFromFile() {
+	public String readFromFile() {
 		String fileText = "";
 
 		this.prepareFile();
@@ -41,21 +40,21 @@ class Utility {
 			FileReader fileReader = new FileReader(file);
 			int c;
 
-			while ((c = fileReader.read())!=-1) {
+			while ((c = fileReader.read()) != -1) {
 				fileText += (char) c;
 			}
 
 			fileReader.close();
-			Toast.makeText(context, "Reading Successful", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(context, "Reading Successful", Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
-			e.printStackTrace();
 			Toast.makeText(context, "Reading Failed", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
 		}
 
 		return fileText;
 	}
 
-	void writeIntoFile (String fileText) {
+	public void writeIntoFile(String fileText) {
 		this.prepareFile();
 
 		try {
@@ -70,7 +69,7 @@ class Utility {
 		}
 	}
 
-	void updateFile (Activity activity, String command) {
+	public void updateFile(Activity activity, String command) {
 		List<Activity> activities = getActivitiesFromFile();
 		int i;
 
@@ -96,12 +95,12 @@ class Utility {
 		String fileText = "";
 		for (i = 0; i < activities.size(); i++) {
 			fileText += activities.get(i).id
-				+ "\n" + activities.get(i).name
-				+ "\n" + activities.get(i).startTime
-				+ "\n" + activities.get(i).endTime
-				+ "\n" + activities.get(i).priority
-				+ "\n" + activities.get(i).status
-				+ "\n";
+					+ "\n" + activities.get(i).name
+					+ "\n" + activities.get(i).startTime
+					+ "\n" + activities.get(i).endTime
+					+ "\n" + activities.get(i).priority
+					+ "\n" + activities.get(i).status
+					+ "\n";
 		}
 
 		this.prepareFile();
@@ -110,20 +109,20 @@ class Utility {
 			fileWriter.write(fileText);
 			fileWriter.flush();
 			fileWriter.close();
-			Toast.makeText(context, "Writing Successful", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(context, "Writing Successful", Toast.LENGTH_SHORT).show();
 		} catch (IOException e) {
-			e.printStackTrace();
 			Toast.makeText(context, "Writing Failed", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
 		}
 	}
 
-	void syncWithFirebase() {
+	public void syncWithFirebase() {
 		Toast.makeText(this.context, "Goals Synchronized", Toast.LENGTH_SHORT).show();
 	}
 
-	void prepareFile() {
+	public void prepareFile() {
 		String fileName = "goals.txt";
-		File directory = this.context.getExternalFilesDir("/");
+		File directory = new File(this.context.getExternalFilesDir("/") + "/" + this.getDeviceInformation() + "/");
 
 		if (!directory.exists()) {
 			if (!directory.mkdir()) {
@@ -136,7 +135,7 @@ class Utility {
 		if (!this.file.exists()) {
 			try {
 				boolean result = this.file.createNewFile();
-				Toast.makeText(this.context, "File creation success!", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(this.context, "File creation success!", Toast.LENGTH_SHORT).show();
 			} catch (IOException e) {
 				Toast.makeText(this.context, "File creation failed!", Toast.LENGTH_SHORT).show();
 				e.printStackTrace();
@@ -144,13 +143,63 @@ class Utility {
 		}
 	}
 
-	String getDeviceInformation() {
-		// this.deviceId += android.os.Build.SERIAL; // SerialId
-		this.deviceId += "SecureId: " + Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID); // SecureId
-		this.deviceId += "\nUUId: " + UUID.randomUUID().toString(); // UUId
+	public String getDeviceInformation() {
+		this.deviceId = "";
+/*
+		if (ActivityCompat.checkSelfPermission (context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+			if (Build.VERSION.SDK_INT > 26) {
+				this.deviceId += "Serial Id: " + android.os.Build.getSerial();
+			} else {
+				this.deviceId += "Serial Id: " + android.os.Build.SERIAL;
+			}
+		}
+
+
+		////////////////////
+
+		int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE);
+
+		if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
+		} else {
+			//TODO
+		}
+
+		@Override
+		public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+			switch (requestCode) {
+				case REQUEST_READ_PHONE_STATE:
+					if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+						//TODO
+					}
+					break;
+
+				default:
+					break;
+			}
+		}
+*/
+		this.deviceId = Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID); // SecureId
+		// this.deviceId = UUID.randomUUID().toString(); // UUId
+
+/*		TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
+		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+			if (Build.VERSION.SDK_INT >= 26) {
+				if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
+					deviceId = telephonyManager.getMeid();
+				} else if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
+					deviceId = telephonyManager.getImei();
+				}
+			} else {
+				deviceId = telephonyManager.getDeviceId();
+			}
+		}
+*/
+		// Toast.makeText(context, "id: " + deviceId, Toast.LENGTH_SHORT).show();
 
 		Hash hash = new Hash();
-		this.deviceId = hash.sha256(this.deviceId);
+		this.deviceId = hash.sha256 (this.deviceId);
 
 		return this.deviceId;
 	}
@@ -170,7 +219,7 @@ class Utility {
 		return  activities;
 	}
 
-	List<Activity> getActivitiesFromFile() {
+	public List<Activity> getActivitiesFromFile() {
 		List<Activity> activities = new ArrayList<>();
 		String string = readFromFile();
 		int i = 0;
@@ -226,7 +275,7 @@ class Utility {
 			}
 			++i;
 
-			activities.add(new Activity(parseInt(id, 10), name, startTime, endTime, priority, status));
+			activities.add (new Activity (parseInt(id, 10), name, startTime, endTime, priority, status));
 		}
 
 		String msg = "";
