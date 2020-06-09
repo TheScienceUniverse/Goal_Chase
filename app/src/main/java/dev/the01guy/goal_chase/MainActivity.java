@@ -1,7 +1,10 @@
 package dev.the01guy.goal_chase;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +21,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.the01guy.goal_chase.R;
@@ -27,14 +32,49 @@ import java.util.List;
 import dev.the01guy.goal_chase.utility.*;
 
 public class MainActivity extends AppCompatActivity {
+	private SharedPreferences settings = null;
+	private SharedPreferences.Editor editor = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		// install time actions
+		this.settings = this.getSharedPreferences ("SETTINGS", MODE_PRIVATE);
+		this.editor  = this.settings.edit();
+		boolean firstTime = this.settings.getBoolean ("FIRST_RUN", false);
+
+		if (!firstTime) {
+			// do the thing for the first time
+			editor.putBoolean ("FIRST_RUN", true);
+
+			// read phone state permission check
+			int permissionResult = ContextCompat.checkSelfPermission (this, Manifest.permission.READ_PHONE_STATE);
+
+			if (permissionResult == PackageManager.PERMISSION_GRANTED) {
+				this.editor.putBoolean ("READ_PHONE_STATE", true);
+			} else {
+				this.editor.putBoolean ("READ_PHONE_STATE", false);
+				ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_PHONE_STATE}, 123);
+			}
+
+			permissionResult = this.checkCallingOrSelfPermission ("android.permission.READ_PRIVILEGED_PHONE_STATE");
+
+			if (permissionResult == PackageManager.PERMISSION_GRANTED) {
+				this.editor.putBoolean ("READ_PRIVILEGED_PHONE_STATE", true);
+			} else {
+				this.editor.putBoolean ("READ_PRIVILEGED_PHONE_STATE", false);
+			}
+
+			editor.apply();
+		}
+
+		// calling utility
 		Utility utility = new Utility(this);
 		utility.prepareFile();
 
+		// setting up floating add button
 		FloatingActionButton fab = findViewById(R.id.fab);
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -43,8 +83,9 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
-		Log.d("Device Information", utility.getDeviceInformation());
+		Log.d ("Device Information", utility.getDeviceId());
 
+		// custom list-view of activities
 		CustomArrayAdapter adapter = new CustomArrayAdapter(this, R.layout.activity_list_item, utility.getActivitiesFromFile());
 		ListView listView = findViewById(R.id.ActivityList);
 		listView.setAdapter(adapter);
@@ -104,5 +145,21 @@ public class MainActivity extends AppCompatActivity {
 
 			return listItem;
 		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		// super.onRequestPermissionResult (requestCode, permissions, grantResults);
+
+		if (requestCode == 123) {
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				this.editor.putBoolean ("READ_PHONE_STATE", true);
+			} else {
+				this.editor.putBoolean ("READ_PHONE_STATE", false);
+				Toast.makeText (this, "Permission Denied", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+		this.editor.apply();
 	}
 }

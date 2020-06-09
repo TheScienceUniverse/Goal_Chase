@@ -122,7 +122,7 @@ public class Utility {
 
 	public void prepareFile() {
 		String fileName = "goals.txt";
-		File directory = new File(this.context.getExternalFilesDir("/") + "/" + this.getDeviceInformation() + "/");
+		File directory = new File(this.context.getExternalFilesDir("/") + "/" + this.getDeviceId() + "/");
 
 		if (!directory.exists()) {
 			if (!directory.mkdir()) {
@@ -143,64 +143,11 @@ public class Utility {
 		}
 	}
 
-	public String getDeviceInformation() {
-		this.deviceId = "";
-/*
-		if (ActivityCompat.checkSelfPermission (context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-			if (Build.VERSION.SDK_INT > 26) {
-				this.deviceId += "Serial Id: " + android.os.Build.getSerial();
-			} else {
-				this.deviceId += "Serial Id: " + android.os.Build.SERIAL;
-			}
-		}
-
-
-		////////////////////
-
-		int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE);
-
-		if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-			ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
-		} else {
-			//TODO
-		}
-
-		@Override
-		public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-			switch (requestCode) {
-				case REQUEST_READ_PHONE_STATE:
-					if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-						//TODO
-					}
-					break;
-
-				default:
-					break;
-			}
-		}
-*/
-		this.deviceId = Settings.Secure.getString(this.context.getContentResolver(), Settings.Secure.ANDROID_ID); // SecureId
-		// this.deviceId = UUID.randomUUID().toString(); // UUId
-
-/*		TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-
-		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-			if (Build.VERSION.SDK_INT >= 26) {
-				if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
-					deviceId = telephonyManager.getMeid();
-				} else if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
-					deviceId = telephonyManager.getImei();
-				}
-			} else {
-				deviceId = telephonyManager.getDeviceId();
-			}
-		}
-*/
-		// Toast.makeText(context, "id: " + deviceId, Toast.LENGTH_SHORT).show();
-
+	public String getDeviceId() {
+		DeviceInformation deviceInformation = new DeviceInformation (context);
 		Hash hash = new Hash();
-		this.deviceId = hash.sha256 (this.deviceId);
-
+		this.deviceId = hash.sha256 (deviceInformation.deviceId);
+		Toast.makeText(this.context, this.deviceId, Toast.LENGTH_SHORT).show();
 		return this.deviceId;
 	}
 
