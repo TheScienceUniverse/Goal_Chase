@@ -13,8 +13,7 @@
 
 	<androidx.coordinatorlayout.widget.CoordinatorLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:id="@+id/MainActivity1">
+		android:layout_height="match_parent">
 
 		<ListView
 			android:id="@+id/ActivityList"
@@ -33,7 +32,6 @@
 	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 	<com.google.android.material.navigation.NavigationView
-		android:id="@+id/NavigationView"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
 		android:layout_gravity="start"

@@ -17,8 +17,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.the01guy.goal_chase.R;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

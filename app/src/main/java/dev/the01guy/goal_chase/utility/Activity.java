@@ -1,8 +1,8 @@
 package dev.the01guy.goal_chase.utility;
 
-import com.the01guy.goal_chase.R;
-
 import java.io.Serializable;
+
+import dev.the01guy.goal_chase.R;
 
 public class Activity implements Serializable {
 	public int id;

@@ -27,7 +27,6 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.the01guy.goal_chase.R;
 
 import java.util.List;
 
