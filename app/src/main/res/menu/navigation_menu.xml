@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/navigate_dashboard"
+		android:title="DashBoard"
+		android:icon="@drawable/dashboard"
+	/>
+
+	<item
+		android:id="@+id/navigate_events"
+		android:title="Events"
+		android:icon="@drawable/events"
+	/>
+
+	<item
+		android:id="@+id/navigate_search"
+		android:title="Search"
+		android:icon="@drawable/search"
+	/>
+
+	<item
+		android:id="@+id/navigate_settings"
+		android:title="Settings"
+		android:icon="@drawable/settings"
+	/>
+
+	<item
+		android:id="@+id/navigate_activities"
+		android:title="Activities"
+		android:icon="@drawable/baseline_trending_up"
+	/>
+
+	<item
+		android:id="@+id/navigate_exit"
+		android:title="Exit"
+		android:icon="@drawable/exit"
+	/>
+</menu>

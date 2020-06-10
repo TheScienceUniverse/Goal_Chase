@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.the01guy.goal_chase">
 
-	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-	<!--<uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />-->
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" /> -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 	<application
 		android:allowBackup="true"
@@ -30,6 +28,12 @@
 				android:value="dev.the01guy.goal_chase.MainActivity"
 			/>
 		</activity>
-	</application>
 
+		<activity android:name="dev.the01guy.goal_chase.ProgressActivity">
+			<meta-data
+				android:name="android.support.PARENT_ACTIVITY"
+				android:value="dev.the01guy.goal_chase.MainActivity"
+			/>
+		</activity>
+	</application>
 </manifest>

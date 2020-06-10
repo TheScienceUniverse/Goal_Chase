@@ -20,9 +20,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.the01guy.goal_chase.R;
@@ -32,6 +34,9 @@ import java.util.List;
 import dev.the01guy.goal_chase.utility.*;
 
 public class MainActivity extends AppCompatActivity {
+	private DrawerLayout drawerLayout;
+	private ActionBarDrawerToggle toggle;
+
 	private SharedPreferences settings = null;
 	private SharedPreferences.Editor editor = null;
 
@@ -70,10 +75,6 @@ public class MainActivity extends AppCompatActivity {
 			editor.apply();
 		}
 
-		// calling utility
-		Utility utility = new Utility(this);
-		utility.prepareFile();
-
 		// setting up floating add button
 		FloatingActionButton fab = findViewById(R.id.fab);
 		fab.setOnClickListener(new View.OnClickListener() {
@@ -83,12 +84,22 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
-		Log.d ("Device Information", utility.getDeviceId());
+		// setting up navigation drawer
+		drawerLayout = findViewById(R.id.MainActivity);
+		toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		drawerLayout.addDrawerListener(toggle);
+		toggle.syncState();
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		// calling utility
+		Utility utility = new Utility (this);
+		utility.prepareFile();
+		Log.d ("Device Id", utility.getDeviceId());
 
 		// custom list-view of activities
-		CustomArrayAdapter adapter = new CustomArrayAdapter(this, R.layout.activity_list_item, utility.getActivitiesFromFile());
-		ListView listView = findViewById(R.id.ActivityList);
-		listView.setAdapter(adapter);
+		CustomArrayAdapter adapter = new CustomArrayAdapter (this, R.layout.activity_list_item, utility.getActivitiesFromFile());
+		ListView listView = findViewById (R.id.ActivityList);
+		listView.setAdapter (adapter);
 	}
 
 	@Override
@@ -100,6 +111,24 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		switch (item.getItemId()) {
+			case R.id.navigate_dashboard:
+				Toast.makeText(this, "Dashboard", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.navigate_events:
+				Toast.makeText(this, "Events", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.navigate_search:
+				Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.navigate_settings:
+				Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.navigate_activities:
+				Toast.makeText(this, "Activities", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.navigate_exit:
+				Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
+				break;
 			case R.id.refresh:
 				Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show();
 				break;

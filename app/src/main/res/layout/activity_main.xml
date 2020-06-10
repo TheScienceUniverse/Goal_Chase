@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.drawerlayout.widget.DrawerLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context="com.the01guy.goal_chase.dev.the01guy.goal_chase.MainActivity">
+	android:clickable="true"
+	android:focusable="true"
+	android:focusableInTouchMode="true"
+	tools:context="dev.the01guy.goal_chase.MainActivity"
+	android:id="@+id/MainActivity">
 
-	<ListView
-		android:id="@+id/ActivityList"
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-	/>
+		android:layout_height="match_parent"
+		android:id="@+id/MainActivity1">
 
-	<com.google.android.material.floatingactionbutton.FloatingActionButton
-		android:id="@+id/fab"
+		<ListView
+			android:id="@+id/ActivityList"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+		/>
+
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:id="@+id/fab"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|end"
+			android:layout_margin="@dimen/fab_margin"
+			app:srcCompat="@drawable/add"
+		/>
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+	<com.google.android.material.navigation.NavigationView
+		android:id="@+id/NavigationView"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="bottom|end"
-		android:layout_margin="@dimen/fab_margin"
-		app:srcCompat="@drawable/add"
+		android:layout_height="match_parent"
+		android:layout_gravity="start"
+		android:background="@android:color/white"
+		app:menu="@menu/navigation_menu"
 	/>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
