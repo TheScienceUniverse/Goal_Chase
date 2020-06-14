@@ -38,20 +38,9 @@
 		android:layout_margin="10dp"
 		android:layout_below="@+id/ActivityName"
 		android:layout_toEndOf="@+id/Priority"
+		android:layout_toRightOf="@+id/Priority"
 		android:src="@drawable/cross"
 	/>
-
-<!--
-	<ImageButton
-		android:id="@+id/Edit"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_margin="5dp"
-		android:layout_below="@+id/ActivityName"
-		android:layout_alignParentEnd="true"
-		android:src="@drawable/edit"
-	/>
--->
 
 	<View
 		android:layout_width="match_parent"

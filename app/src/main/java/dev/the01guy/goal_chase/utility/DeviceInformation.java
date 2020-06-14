@@ -1,23 +1,9 @@
 package dev.the01guy.goal_chase.utility;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import java.lang.reflect.Method;
-import java.util.Objects;
 import java.util.UUID;
 
 class DeviceInformation {

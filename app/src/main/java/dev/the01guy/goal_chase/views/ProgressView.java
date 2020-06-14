@@ -12,11 +12,21 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
+import dev.the01guy.goal_chase.utility.Utility;
+
 public class ProgressView extends View {
 	private Paint paint = null;
+	private int percent = 0;
+	private Utility utility = new Utility (getContext());
 
 	public ProgressView (Context context) {
 		super (context);
+		init (null);
+	}
+
+	public ProgressView (Context context, int percent) {
+		super (context);
+		this.percent = percent;
 		init (null);
 	}
 
@@ -64,23 +74,23 @@ public class ProgressView extends View {
 		float cx = (float) width / 2;
 		float cy = (float) height / 2;
 
-		int perent = 1;
-
-		double degree = 1.8 * perent;
+		double degree = 1.8 * this.percent;
 		float x, y, r = 300;
 
 		for (int i = 0; i < degree; i++) {
 			x = (float) (cx - r * Math.cos (i * Math.PI / 180));
 			y = (float) (cy - r * Math.sin (i * Math.PI / 180));
-			canvas.drawPoint(x, y, paint);
+			canvas.drawPoint(x, y, this.paint);
 		}
 
-		double percent = Math.floor (100.00 / 180);
-		this.paint.setStrokeWidth (1);
-		this.paint.setTextSize(100);
-		this.paint.setStyle(Paint.Style.FILL);
+		String string = "" + this.percent;
+		string = this.utility.padLeftZeros(string, 3) + "%";
 
-		int textWidth = (int) paint.measureText("X");
-		canvas.drawText("100%", cx - 2 * textWidth, cy - 50, paint);
+		this.paint.setStrokeWidth (32);
+		this.paint.setTextSize (100);
+		this.paint.setStyle (Paint.Style.FILL);
+
+		int textWidth = (int) this.paint.measureText ("X");
+		canvas.drawText (string, cx - 2 * textWidth, cy - 50, this.paint);
 	}
 }

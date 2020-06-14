@@ -1,7 +1,6 @@
 package dev.the01guy.goal_chase.utility;
 
 import android.content.Context;
-import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,7 +22,7 @@ public class Utility {
 		this.context = context;
 	}
 
-	String padLeftZeros (String string, int numberOfDigits) {
+	public String padLeftZeros (String string, int numberOfDigits) {
 		String leftZeros = "";
 		for (int i = 0; i < numberOfDigits - string.length(); i++) {
 			leftZeros += "0";

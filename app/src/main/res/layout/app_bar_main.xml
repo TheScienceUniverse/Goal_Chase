@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
@@ -9,21 +9,20 @@
 	android:focusable="true"
 	android:focusableInTouchMode="true"
 	tools:context="dev.the01guy.goal_chase.MainActivity"
-	android:id="@+id/navigation_drawer">
+	android:id="@+id/MainActivity">
 
-	<include
-		layout="@layout/app_bar_main"
+	<ListView
+		android:id="@+id/ActivityList"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 	/>
 
-	<com.google.android.material.navigation.NavigationView
-		android:id="@+id/navigation_view"
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
+		android:id="@+id/fab"
 		android:layout_width="wrap_content"
-		android:layout_height="match_parent"
-		android:layout_gravity="start"
-		android:background="@android:color/white"
-		app:headerLayout="@layout/navigation_drawer_header"
-		app:menu="@menu/navigation_menu"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom|end"
+		android:layout_margin="@dimen/fab_margin"
+		app:srcCompat="@drawable/add"
 	/>
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

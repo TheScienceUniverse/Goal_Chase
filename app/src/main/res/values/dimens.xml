@@ -1,3 +1,8 @@
 <resources>
 	<dimen name="fab_margin">16dp</dimen>
+
+	<dimen name="navigation_drawer_header_height">100dp</dimen>
+
+
+
 </resources>

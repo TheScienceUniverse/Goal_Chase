@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="bottom"
+	android:orientation="vertical"
+	android:theme="@style/ThemeOverlay.AppCompat.Dark"
+	android:background="@color/cardview_dark_background">
+
+	<dev.the01guy.goal_chase.views.DeviceIdView
+		android:id="@+id/device_id_image"
+		android:layout_width="256px"
+		android:layout_height="256px"
+	/>
+
+	<TextView
+		android:id="@+id/ndh_user_name"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/device_id_image"
+		android:text="@string/app_name"
+		android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+	/>
+
+	<TextView
+		android:id="@+id/device_id_hash"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/ndh_user_name"
+		android:text="@string/default_device_id_hash"
+	/>
+</RelativeLayout>

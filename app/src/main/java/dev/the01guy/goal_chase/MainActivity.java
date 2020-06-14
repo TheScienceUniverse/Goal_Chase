@@ -27,22 +27,27 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
-import dev.the01guy.goal_chase.utility.*;
+import dev.the01guy.goal_chase.utility.Activity;
+import dev.the01guy.goal_chase.utility.Utility;
+import dev.the01guy.goal_chase.views.DeviceIdView;
 
-public class MainActivity extends AppCompatActivity {
-	private DrawerLayout drawerLayout;
-	private ActionBarDrawerToggle toggle;
-
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	private SharedPreferences settings = null;
 	private SharedPreferences.Editor editor = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		// calling utility
+		Utility utility = new Utility (this);
+		utility.prepareFile();
+		Log.d ("Device Id", utility.getDeviceId());
 
 		// install time actions
 		this.settings = this.getSharedPreferences ("SETTINGS", MODE_PRIVATE);
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 		if (!firstTime) {
 			// do the thing for the first time
-			editor.putBoolean ("FIRST_RUN", true);
+			this.editor.putBoolean ("FIRST_RUN", true);
 
 			// read phone state permission check
 			int permissionResult = ContextCompat.checkSelfPermission (this, Manifest.permission.READ_PHONE_STATE);
@@ -84,16 +89,18 @@ public class MainActivity extends AppCompatActivity {
 		});
 
 		// setting up navigation drawer
-		drawerLayout = findViewById(R.id.MainActivity);
-		toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-		drawerLayout.addDrawerListener(toggle);
+		DrawerLayout drawerLayout = findViewById (R.id.navigation_drawer);
+		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle (this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		drawerLayout.addDrawerListener (toggle);
 		toggle.syncState();
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled (true);
 
-		// calling utility
-		Utility utility = new Utility (this);
-		utility.prepareFile();
-		Log.d ("Device Id", utility.getDeviceId());
+		NavigationView navigationView = (NavigationView) findViewById (R.id.navigation_view);
+		navigationView.setNavigationItemSelectedListener (this);
+
+		// set calculated hashed device id
+		((TextView) ((View) navigationView.getHeaderView (0)).findViewById (R.id.device_id_hash)).setText (utility.getDeviceId());
+		DeviceIdView deviceIdView = findViewById (R.id.device_id_image);
 
 		// custom list-view of activities
 		CustomArrayAdapter adapter = new CustomArrayAdapter (this, R.layout.activity_list_item, utility.getActivitiesFromFile());
@@ -102,13 +109,13 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
+	public boolean onCreateOptionsMenu (Menu menu) {
+		getMenuInflater().inflate(R.menu.actionbar_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.navigate_dashboard:
 				Toast.makeText(this, "Dashboard", Toast.LENGTH_SHORT).show();
@@ -122,12 +129,21 @@ public class MainActivity extends AppCompatActivity {
 			case R.id.navigate_settings:
 				Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
 				break;
-			case R.id.navigate_activities:
-				Toast.makeText(this, "Activities", Toast.LENGTH_SHORT).show();
+			case R.id.navigate_progress:
+				startActivity(new Intent (MainActivity.this, ProgressActivity.class));
+				// Toast.makeText(this, "Progress", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.navigate_exit:
 				Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
 				break;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected (@NonNull MenuItem item) {
+		switch (item.getItemId()) {
 			case R.id.refresh:
 				Toast.makeText(this, "Refreshed", Toast.LENGTH_SHORT).show();
 				break;
@@ -139,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 				break;
 		}
 
-		return super.onOptionsItemSelected(item);
+		return super.onOptionsItemSelected (item);
 	}
 
 	class CustomArrayAdapter extends ArrayAdapter<Activity> {

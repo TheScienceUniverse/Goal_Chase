@@ -131,7 +131,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				@Override
 				public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 					TextView textView = findViewById(R.id.StartTime);
-					textView.append(" " + hourOfDay + ":" + minute);
+					textView.append(
+							" " + utility.padLeftZeros("" + hourOfDay, 2)
+							+ ":" + utility.padLeftZeros("" + minute, 2)
+					);
 				}
 			}, hour, minute, true).show();
 
@@ -139,7 +142,9 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				@Override
 				public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 					TextView textView = findViewById(R.id.StartTime);
-					string = year + "/" + month + "/" + dayOfMonth;
+					string = utility.padLeftZeros("" + year, 4)
+							+ "/" + utility.padLeftZeros("" + month, 2)
+							+ "/" + utility.padLeftZeros("" + dayOfMonth, 2);
 					textView.setText(string);
 				}
 			}, year, month, day).show();
@@ -148,7 +153,10 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				@Override
 				public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 					TextView textView = findViewById(R.id.EndTime);
-					textView.append(" " + hourOfDay + ":" + minute);
+					textView.append(
+							" " + utility.padLeftZeros("" + hourOfDay, 2)
+							+ ":" + utility.padLeftZeros("" + minute, 2)
+					);
 				}
 			}, hour, minute, true).show();
 
@@ -156,7 +164,9 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 				@Override
 				public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 					TextView textView = findViewById(R.id.EndTime);
-					string = year + "/" + month + "/" + dayOfMonth;
+					string = utility.padLeftZeros("" + year, 4)
+							+ "/" + utility.padLeftZeros("" + month, 2)
+							+ "/" + utility.padLeftZeros("" + dayOfMonth, 2);
 					textView.setText(string);
 				}
 			}, year, month, day).show();
