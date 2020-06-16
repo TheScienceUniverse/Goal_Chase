@@ -146,7 +146,7 @@ public class Utility {
 		DeviceInformation deviceInformation = new DeviceInformation (context);
 		Hash hash = new Hash();
 		this.deviceId = hash.sha256 (deviceInformation.deviceId);
-		Toast.makeText(this.context, this.deviceId, Toast.LENGTH_SHORT).show();
+		// Toast.makeText(this.context, this.deviceId, Toast.LENGTH_SHORT).show();
 		return this.deviceId;
 	}
 

@@ -1,0 +1,17 @@
+https://play.google.com/store/apps/details?id=com.the01guy.goal_chase
+
+t01g123@Android
+
+
+key.jks (file) -> sign_key (alias)
+
+keytool -list -v -keystore D:\Android\Goal_Chase\key\key.jks -alias sign_key
+
+OR
+gradle -> app_name -> tasks -> android -> run (signing report)
+
+MD5: B4:3D:E8:A4:F3:08:A7:44:D6:2D:31:40:53:D8:73:7B
+SHA1: 77:BC:D1:82:FD:0A:AA:62:FB:1B:A3:08:FB:C7:25:BA:80:A7:84:E9
+SHA-256: 65:B8:50:98:02:54:6B:EA:C7:F0:98:48:71:EA:20:ED:B1:A6:20:0E:46:8E:5A:72:F1:D6:64:68:0C:C9:29:59
+
+Permission: This application requires install-time read-phone-state permission to acquire the device unique id.

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		// calling utility
 		Utility utility = new Utility (this);
 		utility.prepareFile();
-		Log.d ("Device Id", utility.getDeviceId());
 
 		// install time actions
 		this.settings = this.getSharedPreferences ("SETTINGS", MODE_PRIVATE);
