@@ -30,16 +30,16 @@ public class ProgressActivity extends AppCompatActivity {
 
 	private void calculateProgress() {
 		int total = activities.size();
-		int completed = 0;
 
 		if (total == 0) {
 			this.progress = 0;
 		} else {
+			int completed = 0;
 			for (int i = 0; i < total; i++) {
-				completed += ((activities.get(i).status.equals("Completed")) ? 1 : 0);
+				completed += ((this.activities.get(i).status.equals("Completed")) ? 1 : 0);
 			}
 
-			this.progress = 100 * (completed / total);
+			this.progress = (100 * completed) / total;
 		}
 	}
 }
