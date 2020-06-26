@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">Goal_Chase</string>
+	<string name="app_name">Goal_Chase</string>
 
-    <string name="navigation_drawer_open">Open</string>
-    <string name="navigation_drawer_close">Close</string>
-    <string name="default_device_id_hash">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>
+	<string name="navigation_drawer_open">Open</string>
+	<string name="navigation_drawer_close">Close</string>
+	<string name="default_device_id_hash">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>
+
+	<string name="default_date_format">ddMMyyyy</string>
+	<string name="long_date_format">ddMMMMyyyy</string>
 </resources>

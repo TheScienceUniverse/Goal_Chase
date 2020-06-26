@@ -1,2 +1,3 @@
+include ':NewCalendar'
 rootProject.name='Goal_Chase'
 include ':app'

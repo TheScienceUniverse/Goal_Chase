@@ -119,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				Toast.makeText(this, "Dashboard", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.navigate_events:
-				Toast.makeText(this, "Events", Toast.LENGTH_SHORT).show();
+				startActivity (new Intent (MainActivity.this, EventCalendarActivity.class));
+				// Toast.makeText(this, "Events", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.navigate_search:
 				Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.navigate_progress:
-				startActivity(new Intent (MainActivity.this, ProgressActivity.class));
+				startActivity (new Intent (MainActivity.this, ProgressActivity.class));
 				// Toast.makeText(this, "Progress", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.navigate_exit:
@@ -154,6 +155,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 
 		return super.onOptionsItemSelected (item);
+	}
+
+	@Override
+	public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		// super.onRequestPermissionResult (requestCode, permissions, grantResults);
+
+		if (requestCode == 123) {
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				this.editor.putBoolean ("READ_PHONE_STATE", true);
+			} else {
+				this.editor.putBoolean ("READ_PHONE_STATE", false);
+				Toast.makeText (this, "Permission Denied", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+		this.editor.apply();
 	}
 
 	class CustomArrayAdapter extends ArrayAdapter<Activity> {
@@ -187,21 +204,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 			return listItem;
 		}
-	}
-
-	@Override
-	public void onRequestPermissionsResult (int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		// super.onRequestPermissionResult (requestCode, permissions, grantResults);
-
-		if (requestCode == 123) {
-			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				this.editor.putBoolean ("READ_PHONE_STATE", true);
-			} else {
-				this.editor.putBoolean ("READ_PHONE_STATE", false);
-				Toast.makeText (this, "Permission Denied", Toast.LENGTH_SHORT).show();
-			}
-		}
-
-		this.editor.apply();
 	}
 }
