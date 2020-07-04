@@ -3,8 +3,7 @@
 	package="dev.the01guy.goal_chase">
 
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<!-- <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" /> -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" /> -->
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 	<application
@@ -14,7 +13,7 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-
+		<activity android:name=".GoalListActivity"></activity>
 		<activity android:name=".MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -25,20 +24,17 @@
 		<activity android:name=".EditActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
-				android:value="dev.the01guy.goal_chase.MainActivity"
-			/>
+				android:value="dev.the01guy.goal_chase.MainActivity" />
 		</activity>
 		<activity android:name=".ProgressActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
-				android:value="dev.the01guy.goal_chase.MainActivity"
-			/>
+				android:value="dev.the01guy.goal_chase.MainActivity" />
 		</activity>
 		<activity android:name=".EventCalendarActivity">
 			<meta-data
 				android:name="android.support.PARENT_ACTIVITY"
-				android:value="dev.the01guy.goal_chase.MainActivity"
-			/>
+				android:value="dev.the01guy.goal_chase.MainActivity" />
 		</activity>
 	</application>
 

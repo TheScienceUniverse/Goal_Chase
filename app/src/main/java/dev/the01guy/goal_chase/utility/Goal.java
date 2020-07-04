@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import dev.the01guy.goal_chase.R;
 
-public class Event implements Serializable {
+public class Goal implements Serializable {
 	public int id;
 	public String name;
 	public String startTime;
@@ -14,15 +14,26 @@ public class Event implements Serializable {
 	public int priorityImageSource;
 	public int statusImageSource;
 
-	public Event (int id, String name, String startTime, String endTime, String priority, String status) {
+	public Goal (int id, String name, String startTime, String endTime, String priority, String status) {
 		this.id = id;
 		this.name = name;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.priority = priority;
 		this.status = status;
-		this.priorityImageSource = getImageSource(priority);
-		this.statusImageSource = getImageSource(status);
+		this.priorityImageSource = getImageSource (priority);
+		this.statusImageSource = getImageSource (status);
+	}
+
+	public Goal (Activity activity) {
+		this.id = activity.id;
+		this.name = activity.name;
+		this.startTime = activity.startTime;
+		this.endTime = activity.endTime;
+		this.priority = activity.priority;
+		this.status = activity.status;
+		this.priorityImageSource = activity.priorityImageSource;
+		this.statusImageSource = activity.statusImageSource;
 	}
 
 	public int getImageSource (String string) {
@@ -76,7 +87,7 @@ public class Event implements Serializable {
 		};
 
 		for (id = 0; id < strings.length; id++) {
-			if (string.equals(strings[id])) {
+			if (string.equals (strings[id])) {
 				break;
 			}
 		}

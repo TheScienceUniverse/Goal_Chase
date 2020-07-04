@@ -5,6 +5,10 @@
 	<string name="navigation_drawer_close">Close</string>
 	<string name="default_device_id_hash">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</string>
 
+	<string name="goal_item_name">Goal Name</string>
+	<string name="goal_item_priority_description">Goal Priority Icon</string>
+	<string name="goal_item_status_description">Goal Status Icon</string>
+
 	<string name="default_date_format">ddMMyyyy</string>
 	<string name="long_date_format">ddMMMMyyyy</string>
 </resources>

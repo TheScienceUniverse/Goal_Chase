@@ -150,7 +150,7 @@ public class Utility {
 		return this.deviceId;
 	}
 
-	List<Activity> getDummyActivityList() {
+	public List<Activity> getDummyActivityList() {
 		List<Activity> activities = new ArrayList<Activity>();
 
 		activities.add(new Activity(0,"Activity-1", "01/01/2000", "01/01/2000", "P1", "Pending"));
@@ -231,5 +231,26 @@ public class Utility {
 		Log.d("id", "" +  msg);
 
 		return activities;
+	}
+
+	public List<Goal> cloneGoalsFromActivities (List<Activity> activities) {
+		List<Goal> goals = new ArrayList<>();
+
+		for (int i = 0; i < activities.size(); i++) {
+			goals.add (new Goal (activities.get(i)));
+		}
+
+		return goals;
+	}
+
+	public List<Integer> getGoalIdsByDay (String date) {
+		List<Goal> goals = this.cloneGoalsFromActivities (this.getActivitiesFromFile());
+		List<Integer> goalIdsOnDate = new ArrayList<>();
+
+		for (int i = 0; i < goals.size(); i++) {
+			goalIdsOnDate.add (i);
+		}
+
+		return goalIdsOnDate;
 	}
 }

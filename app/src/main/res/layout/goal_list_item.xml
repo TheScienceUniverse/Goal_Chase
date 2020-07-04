@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="10dp"
+	android:background="#aaaaaa">
+
+	<View
+		android:id="@+id/horizontal_bar0"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="#000000"
+	/>
+
+	<TextView
+		android:id="@+id/Name"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/horizontal_bar0"
+		android:layout_margin="10dp"
+		android:text="@string/goal_item_name"
+	/>
+
+	<ImageView
+		android:id="@+id/Priority"
+		android:layout_width="30dp"
+		android:layout_height="30dp"
+		android:layout_margin="10dp"
+		android:layout_below="@+id/Name"
+		android:src="@drawable/red"
+		android:contentDescription="@string/goal_item_priority_description"
+	/>
+
+	<ImageView
+		android:id="@+id/Status"
+		android:layout_width="30dp"
+		android:layout_height="30dp"
+		android:layout_margin="10dp"
+		android:layout_below="@+id/Name"
+		android:layout_toEndOf="@+id/Priority"
+		android:layout_toRightOf="@+id/Priority"
+		android:src="@drawable/cross"
+		android:contentDescription="@string/goal_item_status_description"
+	/>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_below="@+id/Priority"
+		android:background="#000000"
+	/>
+</RelativeLayout>

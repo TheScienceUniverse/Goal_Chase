@@ -17,7 +17,8 @@ import dev.the01guy.goal_chase.utility.Utility;
 public class ProgressView extends View {
 	private Paint paint = null;
 	private int percent = 0;
-	private Utility utility = new Utility (getContext());
+	private Utility utility;
+	private DisplayMetrics displayMetrics;
 
 	public ProgressView (Context context) {
 		super (context);
@@ -46,6 +47,9 @@ public class ProgressView extends View {
 	}
 
 	private void init (@Nullable AttributeSet attributeSet) {
+		this.utility = new Utility (getContext());
+		this.displayMetrics = new DisplayMetrics();
+
 		this.paint = new Paint();
 		this.paint.setAntiAlias (true);
 		this.paint.setDither (true);
@@ -65,7 +69,6 @@ public class ProgressView extends View {
 		Context context = getContext();
 		WindowManager windowManager = (WindowManager) context.getSystemService (Context.WINDOW_SERVICE);
 		Display display = windowManager.getDefaultDisplay();
-		DisplayMetrics displayMetrics = new DisplayMetrics();
 		display.getMetrics (displayMetrics);
 
 		int width = displayMetrics.widthPixels;

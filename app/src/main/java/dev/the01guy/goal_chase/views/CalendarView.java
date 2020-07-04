@@ -23,8 +23,7 @@ import java.util.List;
 import java.util.Locale;
 
 import dev.the01guy.goal_chase.R;
-import dev.the01guy.goal_chase.utility.Activity;
-import dev.the01guy.goal_chase.utility.Event;
+import dev.the01guy.goal_chase.utility.Goal;
 import dev.the01guy.goal_chase.utility.Utility;
 
 public class CalendarView extends LinearLayout {
@@ -38,7 +37,7 @@ public class CalendarView extends LinearLayout {
 	Context context;
 	List<Date> dates = new ArrayList<>();
 	Utility utility = new Utility (this.getContext());
-	List<Activity> activities = utility.getActivitiesFromFile();
+	List<Goal> events = utility.cloneGoalsFromActivities (utility.getActivitiesFromFile());
 
 	public CalendarView (Context context) {
 		super(context);
@@ -102,7 +101,7 @@ public class CalendarView extends LinearLayout {
 			monthCalendar.add (Calendar.DAY_OF_MONTH, 1);
 		}
 
-		List<Event> events = new ArrayList<>();
+		List<Goal> events = new ArrayList<>();
 		GridAdapter gridAdapter = new GridAdapter (context, dates, calendar, events);
 		daysView.setAdapter (gridAdapter);
 	}
@@ -110,10 +109,10 @@ public class CalendarView extends LinearLayout {
 	static class GridAdapter extends ArrayAdapter {
 		List<Date> dates;
 		Calendar currentDate;
-		List<Event> events;
+		List<Goal> events;
 		LayoutInflater inflater;
 
-		public GridAdapter (@NonNull Context context, List<Date> dates, Calendar currentDate, List<Event> events) {
+		public GridAdapter (@NonNull Context context, List<Date> dates, Calendar currentDate, List<Goal> events) {
 			super (context, R.layout.event_calendar_day);
 
 			this.dates = dates;
@@ -141,13 +140,13 @@ public class CalendarView extends LinearLayout {
 			}
 
 			if (displayMonth == currentMonth && displayYear == currentYear) {
-				view.setBackgroundColor (getContext().getResources().getColor(R.color.white));
+				view.setBackgroundColor (getContext().getResources().getColor (R.color.white));
 			} else {
 				view.setBackgroundColor (Color.parseColor ("#CCCCCC"));
 			}
 
-			TextView calendarDay = view.findViewById (R.id.calendar_day);
-			calendarDay.setText (String.valueOf (dayNumber));
+			TextView textView = view.findViewById (R.id.calendar_day);
+			textView.setText (String.valueOf (dayNumber));
 
 			return view;
 		}

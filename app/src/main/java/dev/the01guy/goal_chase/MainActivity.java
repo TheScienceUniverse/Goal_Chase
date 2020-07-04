@@ -123,14 +123,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				// Toast.makeText(this, "Events", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.navigate_search:
-				Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+				startActivity (new Intent (MainActivity.this, GoalListActivity.class));
 				break;
 			case R.id.navigate_settings:
 				Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.navigate_progress:
 				startActivity (new Intent (MainActivity.this, ProgressActivity.class));
-				// Toast.makeText(this, "Progress", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.navigate_exit:
 				Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show();
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		@Override
 		public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View listItem = layoutInflater.inflate(R.layout.activity_list_item, parent, false);
+			View listItem = layoutInflater.inflate (R.layout.activity_list_item, parent, false);
 
 			((TextView) listItem.findViewById (R.id.ActivityName)).setText (this.activities.get(position).name);
 			((ImageView) listItem.findViewById (R.id.Priority)).setImageResource (this.activities.get(position).priorityImageSource);
