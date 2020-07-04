@@ -21,29 +21,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import dev.the01guy.goal_chase.utility.Activity;
+import dev.the01guy.goal_chase.utility.Goal;
 import dev.the01guy.goal_chase.utility.Utility;
 
 import static java.lang.Integer.parseInt;
 
-public class EditActivity extends AppCompatActivity implements View.OnClickListener {
+public class EditGoalActivity extends AppCompatActivity implements View.OnClickListener {
 	private String string = "";
 	private Utility utility = new Utility(this);
-	private Activity activity = null;
+	private Goal goal = null;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_edit);
+	protected void onCreate (Bundle savedInstanceState) {
+		super.onCreate (savedInstanceState);
+		setContentView (R.layout.activity_edit_goal);
 
 		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle("Edit Activity");
+		actionBar.setTitle ("Edit Activity");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
-		this.activity = (Activity) getIntent().getSerializableExtra("Activity");
+		this.goal = (Goal) getIntent().getSerializableExtra ("Goal");
 
-		if (this.activity == null) {
-			this.activity = new Activity (-1, "", "", "", "", "");
+		if (this.goal == null) {
+			this.goal = new Goal (-1, "", "", "", "", "");
 		} else {
 			this.setValues();
 		}
@@ -90,13 +90,13 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 	void save() {
 		if (this.dataReady()) {
-			if (this.activity.id == -1) {
-				this.utility.updateFile (this.activity, "Add");
+			if (this.goal.id == -1) {
+				this.utility.updateFile (this.goal, "Add");
 			} else {
-				this.utility.updateFile (this.activity, "Update");
+				this.utility.updateFile (this.goal, "Update");
 			}
 
-			startActivity(new Intent (EditActivity.this, MainActivity.class));
+			startActivity(new Intent (EditGoalActivity.this, MainActivity.class));
 		} else {
 			Toast.makeText(this, "Data not ready", Toast.LENGTH_SHORT).show();
 		}
@@ -107,11 +107,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	void delete() {
-		if (this.dataReady() && this.activity.id != -1) {
-			this.utility.updateFile(this.activity, "Delete");
+		if (this.dataReady() && this.goal.id != -1) {
+			this.utility.updateFile(this.goal, "Delete");
 		}
 
-		startActivity(new Intent(EditActivity.this, MainActivity.class));
+		startActivity(new Intent(EditGoalActivity.this, MainActivity.class));
 	}
 
 	void pickDateTime(int id) {
@@ -174,28 +174,28 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 	}
 
 	void getValues() {
-		this.activity.name = ((EditText)findViewById(R.id.EditName)).getText().toString();
-		this.activity.startTime = ((TextView)findViewById(R.id.StartTime)).getText().toString();
-		this.activity.endTime = ((TextView)findViewById(R.id.EndTime)).getText().toString();
-		this.activity.priority = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetPriority)).getCheckedRadioButtonId())).getText().toString();
-		this.activity.status = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetStatus)).getCheckedRadioButtonId())).getText().toString();
+		this.goal.name = ((EditText)findViewById(R.id.EditName)).getText().toString();
+		this.goal.startTime = ((TextView)findViewById(R.id.StartTime)).getText().toString();
+		this.goal.endTime = ((TextView)findViewById(R.id.EndTime)).getText().toString();
+		this.goal.priority = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetPriority)).getCheckedRadioButtonId())).getText().toString();
+		this.goal.status = ((RadioButton) findViewById(((RadioGroup) findViewById(R.id.SetStatus)).getCheckedRadioButtonId())).getText().toString();
 	}
 
 	void setValues() {
-		((EditText)findViewById(R.id.EditName)).setText(this.activity.name);
-		((TextView)findViewById(R.id.StartTime)).setText(this.activity.startTime);
-		((TextView)findViewById(R.id.EndTime)).setText(this.activity.endTime);
-		((RadioButton) findViewById(this.activity.getRadioButtonId(this.activity.priority))).setChecked(true);
-		((RadioButton) findViewById(this.activity.getRadioButtonId(this.activity.status))).setChecked(true);
+		((EditText) findViewById (R.id.EditName)).setText (this.goal.name);
+		((TextView) findViewById (R.id.StartTime)).setText (this.goal.startTime);
+		((TextView) findViewById (R.id.EndTime)).setText (this.goal.endTime);
+		((RadioButton) findViewById (this.goal.getRadioButtonId (this.goal.priority))).setChecked (true);
+		((RadioButton) findViewById (this.goal.getRadioButtonId (this.goal.status))).setChecked (true);
 	}
 
 	boolean dataReady() {
 		this.getValues();
 
-		return !this.activity.name.equals("")
-			&& !this.activity.startTime.equals("YYYY/MM/DD HH:MM:SS")
-			&& !this.activity.endTime.equals("YYYY/MM/DD HH:MM:SS")
-			&& !this.activity.priority.equals("")
-			&& !this.activity.status.equals("");
+		return !this.goal.name.equals("")
+			&& !this.goal.startTime.equals("YYYY/MM/DD HH:MM:SS")
+			&& !this.goal.endTime.equals("YYYY/MM/DD HH:MM:SS")
+			&& !this.goal.priority.equals("")
+			&& !this.goal.status.equals("");
 	}
 }

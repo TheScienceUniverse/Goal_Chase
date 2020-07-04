@@ -6,13 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-import dev.the01guy.goal_chase.utility.Activity;
+import dev.the01guy.goal_chase.utility.Goal;
 import dev.the01guy.goal_chase.utility.Utility;
 import dev.the01guy.goal_chase.views.ProgressView;
 
 public class ProgressActivity extends AppCompatActivity {
 	private int progress = 0;
-	private List <Activity> activities;
+	private List <Goal> goals;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class ProgressActivity extends AppCompatActivity {
 		setContentView (R.layout.activity_progress);
 
 		Utility utility = new Utility (this);
-		this.activities = utility.getActivitiesFromFile();
+		this.goals = utility.getGoalsFromFile();
 
 		this.calculateProgress();
 
@@ -29,14 +29,14 @@ public class ProgressActivity extends AppCompatActivity {
 	}
 
 	private void calculateProgress() {
-		int total = activities.size();
+		int total = goals.size();
 
 		if (total == 0) {
 			this.progress = 0;
 		} else {
 			int completed = 0;
 			for (int i = 0; i < total; i++) {
-				completed += ((this.activities.get(i).status.equals("Completed")) ? 1 : 0);
+				completed += ((this.goals.get(i).status.equals("Completed")) ? 1 : 0);
 			}
 
 			this.progress = (100 * completed) / total;

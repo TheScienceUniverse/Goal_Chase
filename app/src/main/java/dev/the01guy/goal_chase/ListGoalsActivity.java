@@ -17,20 +17,19 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import dev.the01guy.goal_chase.utility.Activity;
 import dev.the01guy.goal_chase.utility.Goal;
 import dev.the01guy.goal_chase.utility.Utility;
 
-public class GoalListActivity extends AppCompatActivity {
+public class ListGoalsActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_goal_list);
+		setContentView(R.layout.activity_list_goals);
 
 		Utility utility = new Utility (this);
 
-		CustomArrayAdapter adapter = new CustomArrayAdapter (this, R.layout.goal_list_item, utility.cloneGoalsFromActivities (utility.getActivitiesFromFile()));
+		CustomArrayAdapter adapter = new CustomArrayAdapter (this, R.layout.goal_list_item, utility.getGoalsFromFile());
 		ListView listView = findViewById (R.id.GoalList);
 		listView.setAdapter (adapter);
 	}
@@ -58,7 +57,7 @@ public class GoalListActivity extends AppCompatActivity {
 			listItem.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent (context, EditActivity.class);
+					Intent intent = new Intent (context, EditGoalActivity.class);
 					intent.putExtra ("Activity", goals.get (position));
 					startActivity (intent);
 				}

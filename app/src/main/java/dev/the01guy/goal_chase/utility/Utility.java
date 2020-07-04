@@ -68,37 +68,37 @@ public class Utility {
 		}
 	}
 
-	public void updateFile(Activity activity, String command) {
-		List<Activity> activities = getActivitiesFromFile();
+	public void updateFile(Goal goal, String command) {
+		List<Goal> goals = getGoalsFromFile();
 		int i;
 
-		for (i = 0; i < activities.size(); i++) {
-			if (activity.id == activities.get(i).id) {
+		for (i = 0; i < goals.size(); i++) {
+			if (goal.id == goals.get(i).id) {
 				break;
 			}
 		}
 
 		if (command.equals("Delete")) {
-			if (activity.id != -1) {
-				activities.remove(i);
+			if (goal.id != -1) {
+				goals.remove(i);
 			}
 		} else {
-			if (activity.id == -1) {
-				activity.id = activities.size();
-				activities.add(activity);
+			if (goal.id == -1) {
+				goal.id = goals.size();
+				goals.add (goal);
 			} else {
-				activities.set(i, activity);
+				goals.set(i, goal);
 			}
 		}
 
 		String fileText = "";
-		for (i = 0; i < activities.size(); i++) {
-			fileText += activities.get(i).id
-					+ "\n" + activities.get(i).name
-					+ "\n" + activities.get(i).startTime
-					+ "\n" + activities.get(i).endTime
-					+ "\n" + activities.get(i).priority
-					+ "\n" + activities.get(i).status
+		for (i = 0; i < goals.size(); i++) {
+			fileText += goals.get(i).id
+					+ "\n" + goals.get(i).name
+					+ "\n" + goals.get(i).startTime
+					+ "\n" + goals.get(i).endTime
+					+ "\n" + goals.get(i).priority
+					+ "\n" + goals.get(i).status
 					+ "\n";
 		}
 
@@ -150,23 +150,23 @@ public class Utility {
 		return this.deviceId;
 	}
 
-	public List<Activity> getDummyActivityList() {
-		List<Activity> activities = new ArrayList<Activity>();
+	public List<Goal> getDummyActivityList() {
+		List<Goal> goals = new ArrayList<>();
 
-		activities.add(new Activity(0,"Activity-1", "01/01/2000", "01/01/2000", "P1", "Pending"));
-		activities.add(new Activity(1,"Activity-2", "01/01/2000", "01/01/2000", "P2", "Pending"));
-		activities.add(new Activity(2,"Activity-3", "01/01/2000", "01/01/2000", "P3", "Suspended"));
-		activities.add(new Activity(3,"Activity-4", "01/01/2000", "01/01/2000", "P4", "Suspended"));
-		activities.add(new Activity(4,"Activity-5", "01/01/2000", "01/01/2000", "P5", "Completed"));
-		activities.add(new Activity(5,"Activity-6", "01/01/2000", "01/01/2000", "P5", "Completed"));
-		activities.add(new Activity(6,"Activity-7", "01/01/2000", "01/01/2000", "P5", "Completed"));
-		activities.add(new Activity(7,"Activity-8", "01/01/2000", "01/01/2000", "P5", "Completed"));
+		goals.add(new Goal (0,"Activity-1", "01/01/2000", "01/01/2000", "P1", "Pending"));
+		goals.add(new Goal (1,"Activity-2", "01/01/2000", "01/01/2000", "P2", "Pending"));
+		goals.add(new Goal (2,"Activity-3", "01/01/2000", "01/01/2000", "P3", "Suspended"));
+		goals.add(new Goal (3,"Activity-4", "01/01/2000", "01/01/2000", "P4", "Suspended"));
+		goals.add(new Goal (4,"Activity-5", "01/01/2000", "01/01/2000", "P5", "Completed"));
+		goals.add(new Goal (5,"Activity-6", "01/01/2000", "01/01/2000", "P5", "Completed"));
+		goals.add(new Goal (6,"Activity-7", "01/01/2000", "01/01/2000", "P5", "Completed"));
+		goals.add(new Goal (7,"Activity-8", "01/01/2000", "01/01/2000", "P5", "Completed"));
 
-		return  activities;
+		return  goals;
 	}
 
-	public List<Activity> getActivitiesFromFile() {
-		List<Activity> activities = new ArrayList<>();
+	public List<Goal> getGoalsFromFile() {
+		List<Goal> goals = new ArrayList<>();
 		String string = readFromFile();
 		int i = 0;
 
@@ -221,30 +221,20 @@ public class Utility {
 			}
 			++i;
 
-			activities.add (new Activity (parseInt(id, 10), name, startTime, endTime, priority, status));
+			goals.add (new Goal (parseInt (id, 10), name, startTime, endTime, priority, status));
 		}
 
 		String msg = "";
-		for (i = 0; i < activities.size(); i++) {
-			msg += activities.get(i).id + " ";
+		for (i = 0; i < goals.size(); i++) {
+			msg += goals.get(i).id + " ";
 		}
 		Log.d("id", "" +  msg);
-
-		return activities;
-	}
-
-	public List<Goal> cloneGoalsFromActivities (List<Activity> activities) {
-		List<Goal> goals = new ArrayList<>();
-
-		for (int i = 0; i < activities.size(); i++) {
-			goals.add (new Goal (activities.get(i)));
-		}
 
 		return goals;
 	}
 
 	public List<Integer> getGoalIdsByDay (String date) {
-		List<Goal> goals = this.cloneGoalsFromActivities (this.getActivitiesFromFile());
+		List<Goal> goals = this.getGoalsFromFile();
 		List<Integer> goalIdsOnDate = new ArrayList<>();
 
 		for (int i = 0; i < goals.size(); i++) {

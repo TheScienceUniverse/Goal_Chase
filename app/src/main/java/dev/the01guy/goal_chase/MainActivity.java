@@ -30,7 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
-import dev.the01guy.goal_chase.utility.Activity;
+import dev.the01guy.goal_chase.utility.Goal;
 import dev.the01guy.goal_chase.utility.Utility;
 import dev.the01guy.goal_chase.views.DeviceIdView;
 
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startActivity(new Intent(MainActivity.this, EditActivity.class));
+				startActivity(new Intent(MainActivity.this, EditGoalActivity.class));
 			}
 		});
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		DeviceIdView deviceIdView = findViewById (R.id.device_id_image);
 
 		// custom list-view of activities
-		CustomArrayAdapter adapter = new CustomArrayAdapter (this, R.layout.activity_list_item, utility.getActivitiesFromFile());
+		CustomArrayAdapter adapter = new CustomArrayAdapter (this, R.layout.activity_list_item, utility.getGoalsFromFile());
 		ListView listView = findViewById (R.id.ActivityList);
 		listView.setAdapter (adapter);
 	}
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				break;
 			case R.id.navigate_search:
 				// Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
-				startActivity (new Intent (MainActivity.this, GoalListActivity.class));
+				startActivity (new Intent (MainActivity.this, ListGoalsActivity.class));
 				break;
 			case R.id.navigate_settings:
 				Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
@@ -173,31 +173,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		this.editor.apply();
 	}
 
-	class CustomArrayAdapter extends ArrayAdapter<Activity> {
+	class CustomArrayAdapter extends ArrayAdapter<Goal> {
 		Context context;
-		List<Activity> activities;
+		List<Goal> goals;
 
-		CustomArrayAdapter(Context context, int layout, List<Activity> activities) {
-			super(context, layout, activities);
+		CustomArrayAdapter(Context context, int layout, List<Goal> goals) {
+			super(context, layout, goals);
 			this.context = context;
-			this.activities = activities;
+			this.goals = goals;
 		}
 
 		@NonNull
 		@Override
 		public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View listItem = layoutInflater.inflate (R.layout.activity_list_item, parent, false);
+			View listItem = layoutInflater.inflate (R.layout.goal_list_item, parent, false);
 
-			((TextView) listItem.findViewById (R.id.ActivityName)).setText (this.activities.get(position).name);
-			((ImageView) listItem.findViewById (R.id.Priority)).setImageResource (this.activities.get(position).priorityImageSource);
-			((ImageView) listItem.findViewById (R.id.Status)).setImageResource (this.activities.get(position).statusImageSource);
+			((TextView) listItem.findViewById (R.id.Name)).setText (this.goals.get(position).name);
+			((ImageView) listItem.findViewById (R.id.Priority)).setImageResource (this.goals.get(position).priorityImageSource);
+			((ImageView) listItem.findViewById (R.id.Status)).setImageResource (this.goals.get(position).statusImageSource);
 
 			listItem.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(context, EditActivity.class);
-					intent.putExtra("Activity", activities.get(position));
+					Intent intent = new Intent(context, EditGoalActivity.class);
+					intent.putExtra("Goal", goals.get(position));
 					startActivity(intent);
 				}
 			});

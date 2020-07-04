@@ -25,17 +25,6 @@ public class Goal implements Serializable {
 		this.statusImageSource = getImageSource (status);
 	}
 
-	public Goal (Activity activity) {
-		this.id = activity.id;
-		this.name = activity.name;
-		this.startTime = activity.startTime;
-		this.endTime = activity.endTime;
-		this.priority = activity.priority;
-		this.status = activity.status;
-		this.priorityImageSource = activity.priorityImageSource;
-		this.statusImageSource = activity.statusImageSource;
-	}
-
 	public int getImageSource (String string) {
 		int id = 0;
 

@@ -37,7 +37,7 @@ public class CalendarView extends LinearLayout {
 	Context context;
 	List<Date> dates = new ArrayList<>();
 	Utility utility = new Utility (this.getContext());
-	List<Goal> events = utility.cloneGoalsFromActivities (utility.getActivitiesFromFile());
+	List<Goal> goals = utility.getGoalsFromFile();
 
 	public CalendarView (Context context) {
 		super(context);
