@@ -1,8 +1,8 @@
 package dev.the01guy.goal_chase;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import dev.the01guy.goal_chase.views.CalendarView;
 

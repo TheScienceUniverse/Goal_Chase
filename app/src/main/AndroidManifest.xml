@@ -15,8 +15,6 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 
-		<activity android:name=".ListGoalsActivity"></activity>
-
 		<activity android:name=".MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -45,6 +43,7 @@
 				android:value="dev.the01guy.goal_chase.MainActivity"
 			/>
 		</activity>
-	</application>
 
+		<activity android:name=".ListGoalsActivity"></activity>
+	</application>
 </manifest>
