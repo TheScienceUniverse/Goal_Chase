@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		Context context;
 		List<Goal> goals;
 
-		CustomArrayAdapter(Context context, int layout, List<Goal> goals) {
+		CustomArrayAdapter (Context context, int layout, List<Goal> goals) {
 			super(context, layout, goals);
 			this.context = context;
 			this.goals = goals;

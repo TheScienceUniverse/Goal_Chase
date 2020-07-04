@@ -232,15 +232,4 @@ public class Utility {
 
 		return goals;
 	}
-
-	public List<Integer> getGoalIdsByDay (String date) {
-		List<Goal> goals = this.getGoalsFromFile();
-		List<Integer> goalIdsOnDate = new ArrayList<>();
-
-		for (int i = 0; i < goals.size(); i++) {
-			goalIdsOnDate.add (i);
-		}
-
-		return goalIdsOnDate;
-	}
 }

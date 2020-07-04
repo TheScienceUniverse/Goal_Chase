@@ -13,6 +13,6 @@ public class EventCalendarActivity extends AppCompatActivity {
 		super.onCreate (savedInstanceState);
 		setContentView (R.layout.activity_event_calendar);
 
-		CalendarView calendarView = (CalendarView) findViewById (R.id.calendar_view);
+		CalendarView calendarView = findViewById (R.id.calendar_view);
 	}
 }

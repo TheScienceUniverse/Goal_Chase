@@ -1,8 +1,11 @@
 package dev.the01guy.goal_chase.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,9 +26,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import dev.the01guy.goal_chase.EditGoalActivity;
 import dev.the01guy.goal_chase.R;
 import dev.the01guy.goal_chase.utility.Goal;
 import dev.the01guy.goal_chase.utility.Utility;
+
+import static java.lang.Integer.parseInt;
 
 public class CalendarView extends LinearLayout {
 	private ImageButton calendarBackward, calendarForward;
@@ -106,7 +113,7 @@ public class CalendarView extends LinearLayout {
 		daysView.setAdapter (gridAdapter);
 	}
 
-	static class GridAdapter extends ArrayAdapter {
+	class GridAdapter extends ArrayAdapter {
 		List<Date> dates;
 		Calendar currentDate;
 		List<Goal> events;
@@ -148,6 +155,18 @@ public class CalendarView extends LinearLayout {
 			TextView textView = view.findViewById (R.id.calendar_day);
 			textView.setText (String.valueOf (dayNumber));
 
+			boolean[] goalDays = getDaysByMonthHavingGoals (currentMonth, currentYear);
+
+			if (goalDays [dayNumber - 1] && displayMonth == currentMonth && displayYear == currentYear) {
+				int sdk = Build.VERSION.SDK_INT;
+
+				if(sdk < Build.VERSION_CODES.JELLY_BEAN) {
+					view.setBackgroundDrawable (ContextCompat.getDrawable (getContext(), R.drawable.border_red));
+				} else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+					view.setBackground(getResources().getDrawable (R.drawable.border_red));
+				}
+			}
+
 			return view;
 		}
 
@@ -165,6 +184,27 @@ public class CalendarView extends LinearLayout {
 		@Override
 		public Object getItem (int position) {
 			return this.dates.get (position);
+		}
+
+		boolean[] getDaysByMonthHavingGoals (int month, int year) {
+			String year_month = utility.padLeftZeros (Integer.toString (year), 4)
+					+ "/" + utility.padLeftZeros (Integer.toString (month), 2);
+			Goal goal;
+			boolean[] goalDays = new boolean[31];
+
+			for (int i = 0; i < goals.size(); i++) {
+				goal = goals.get (i);
+
+				if (goal.startTime.substring (0, 7).equals (year_month)) {
+					goalDays [parseInt (goal.startTime.substring (8, 10)) - 1] = true;
+				}
+
+				if (goal.endTime.substring (0, 7).equals (year_month)) {
+					goalDays [parseInt (goal.endTime.substring (8, 10)) - 1] = true;
+				}
+			}
+
+			return goalDays;
 		}
 	}
 }
